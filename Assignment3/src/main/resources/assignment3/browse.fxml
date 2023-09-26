@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="845.0" maxWidth="1045.0" minHeight="845.0" minWidth="1045.0" prefHeight="845.0" prefWidth="1045.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignmentPartB.BrowseController">
+<AnchorPane maxHeight="845.0" maxWidth="1045.0" minHeight="845.0" minWidth="1045.0" prefHeight="845.0" prefWidth="1045.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment3.BrowseController">
    <children>
       <GridPane layoutX="275.0" layoutY="289.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
