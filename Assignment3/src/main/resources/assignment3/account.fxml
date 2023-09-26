@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="845.0" maxWidth="1045.0" minHeight="845.0" minWidth="1045.0" prefHeight="845.0" prefWidth="1045.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignmentPartB.AccountController">
+   <children>
+      <GridPane layoutX="275.0" layoutY="289.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="75.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-border-width: 1; -fx-border-color: c4c4c4; -fx-border-radius: 5; -fx-background-color: white;" GridPane.rowIndex="1">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+               <children>
+                  <GridPane HBox.hgrow="ALWAYS">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                           <children>
+                              <Button mnemonicParsing="false" text="Delete Account" />
+                           </children>
+                        </VBox>
+                        <GridPane>
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <GridPane.margin>
+                              <Insets left="10.0" right="10.0" top="10.0" />
+                           </GridPane.margin>
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <GridPane>
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+                                             <children>
+                                                <Label text="Account Details:" />
+                                             </children>
+                                          </VBox>
+                                          <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                                             <children>
+                                                <Label text="First Name:" />
+                                                <TextField fx:id="txtFirstName">
+                                                   <VBox.margin>
+                                                      <Insets right="5.0" top="1.0" />
+                                                   </VBox.margin>
+                                                </TextField>
+                                                <Label text="* Invalid - Please try again" textFill="RED" />
+                                             </children>
+                                          </VBox>
+                                          <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                             <children>
+                                                <Label text="Last Name:" />
+                                                <TextField fx:id="txtLastName">
+                                                   <VBox.margin>
+                                                      <Insets top="1.0" />
+                                                   </VBox.margin>
+                                                </TextField>
+                                                <Label text="* Invalid - Please try again" textFill="RED" />
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
+                                             <children>
+                                                <Button mnemonicParsing="false" text="Update" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </GridPane>
+                                    <GridPane>
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+                                             <children>
+                                                <Label text="Email Address:" />
+                                                <TextField fx:id="txtEmail" />
+                                                <Label text="* Invalid - Please try again" textFill="RED" />
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                                             <children>
+                                                <Button mnemonicParsing="false" text="Update" />
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
+                                             <children>
+                                                <Label text="Phone Number (OPTIONAL???):" />
+                                                <TextField />
+                                                <Label text="* Invalid - Please try again" textFill="RED" />
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="3">
+                                             <children>
+                                                <Button mnemonicParsing="false" text="Update" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </GridPane>
+                                    <GridPane>
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+                                             <children>
+                                                <Label text="Update Password:" />
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                                             <children>
+                                                <Label text="Current Password:" />
+                                                <PasswordField />
+                                                <Label text="* Invalid - Please try again" textFill="RED" />
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
+                                             <children>
+                                                <Label text="New Password:" />
+                                                <PasswordField />
+                                                <Label text="* Invalid - Please try again" textFill="RED" />
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="3">
+                                             <children>
+                                                <Label text="Confirm New Password:" />
+                                                <PasswordField />
+                                                <Label text="* Invalid - Please try again" textFill="RED" />
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="4">
+                                             <children>
+                                                <Button mnemonicParsing="false" text="Update" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                              </VBox>
+                              <GridPane GridPane.columnIndex="1">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints maxHeight="350.0" minHeight="350.0" prefHeight="350.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="436.0" minHeight="10.0" prefHeight="326.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <VBox prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <GridPane>
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                                              <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+                                                   <children>
+                                                      <Label text="Shipping Details:" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                                                   <children>
+                                                      <Label text="Address:" />
+                                                      <TextField />
+                                                      <Label text="* Invalid - Please try again" textFill="RED" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </GridPane>
+                                          <GridPane>
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                                              <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+                                                   <children>
+                                                      <Label text="Postcode:" />
+                                                      <TextField>
+                                                         <opaqueInsets>
+                                                            <Insets />
+                                                         </opaqueInsets>
+                                                         <VBox.margin>
+                                                            <Insets right="5.0" />
+                                                         </VBox.margin>
+                                                      </TextField>
+                                                      <Label text="* Invalid - Please try again" textFill="RED" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                                                   <children>
+                                                      <Label text="State:" />
+                                                      <TextField />
+                                                      <Label text="* Invalid - Please try again" textFill="RED" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                                                   <children>
+                                                      <Button mnemonicParsing="false" text="Update" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <GridPane.margin>
+                                          <Insets left="10.0" />
+                                       </GridPane.margin>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                                       <GridPane.margin>
+                                          <Insets left="10.0" />
+                                       </GridPane.margin>
+                                       <children>
+                                          <Label text="Order History:" />
+                                          <TableView fx:id="tblOrderHistory" prefHeight="200.0" prefWidth="200.0">
+                                            <columns>
+                                              <TableColumn editable="false" maxWidth="75.0" minWidth="75.0" prefWidth="75.0" resizable="false" sortable="false" text="ORDER #" />
+                                              <TableColumn editable="false" maxWidth="75.0" minWidth="75.0" prefWidth="75.0" resizable="false" sortable="false" text="DATE" />
+                                              <TableColumn editable="false" maxWidth="175.0" minWidth="175.0" prefWidth="175.0" resizable="false" sortable="false" text="SHIPPED TO" />
+                                              <TableColumn editable="false" maxWidth="95.0" minWidth="95.0" prefWidth="95.0" resizable="false" sortable="false" text="ORDER TOTAL" />
+                                              <TableColumn editable="false" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" resizable="false" sortable="false" text="STATUS" />
+                                            </columns>
+                                          </TableView>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </GridPane>
+               </children>
+            </HBox>
+            <GridPane style="-fx-border-width: 1 0 1 0; -fx-border-color: c4c4c4; -fx-background-color: e5e5e5;">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Application/Page Title..?">
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="15.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+                     <children>
+                        <Button fx:id="btnBrowseProds" mnemonicParsing="false" onAction="#browseProdsAction" text="Browse Products">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin></Button>
+                        <MenuButton mnemonicParsing="false" text="Account">
+                          <items>
+                            <MenuItem fx:id="btnEditAccount" mnemonicParsing="false" onAction="#editAccountAction" text="Edit Account" />
+                            <MenuItem fx:id="btnLogout" mnemonicParsing="false" onAction="#logoutAction" text="Logout" />
+                          </items>
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </MenuButton>
+                        <MenuButton mnemonicParsing="false" text="Cart">
+                          <items>
+                            <MenuItem fx:id="btnViewCart" mnemonicParsing="false" onAction="#viewCartAction" text="View Cart" />
+                            <MenuItem fx:id="btnCheckout" mnemonicParsing="false" onAction="#checkoutAction" text="Checkout" />
+                          </items>
+                        </MenuButton>
+                     </children>
+                  </HBox>
+               </children>
+            </GridPane>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

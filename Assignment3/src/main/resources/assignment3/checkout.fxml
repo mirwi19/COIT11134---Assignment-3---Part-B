@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="845.0" maxWidth="1045.0" minHeight="845.0" minWidth="1045.0" prefHeight="845.0" prefWidth="1045.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignmentPartB.CheckoutController">
+   <children>
+      <GridPane layoutX="275.0" layoutY="289.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="75.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-border-width: 1; -fx-border-color: c4c4c4; -fx-border-radius: 5; -fx-background-color: white;" GridPane.rowIndex="1">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+               <children>
+                  <GridPane maxHeight="745.0" maxWidth="1075.0" prefHeight="748.0" prefWidth="1075.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label text="Your cart:" />
+                              <ScrollPane fx:id="paneCartDisplay" hbarPolicy="NEVER" prefHeight="692.0" prefWidth="502.0" vbarPolicy="ALWAYS" />
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Label fx:id="txtTotal" text="Total:">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <GridPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </GridPane.margin>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                           <GridPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </GridPane.margin>
+                           <children>
+                              <Label text="Shipping Details:" />
+                              <VBox maxHeight="160.0" maxWidth="500.0" prefHeight="160.0" prefWidth="500.0" style="-fx-border-width: 1; -fx-border-color: c4c4c4; -fx-border-radius: 2;">
+                                 <children>
+                                    <GridPane>
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+                                             <children>
+                                                <Label text="Address:" />
+                                                <TextField />
+                                                <Label text="* Invalid - Please try again" textFill="RED" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </GridPane>
+                                    <GridPane>
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+                                             <children>
+                                                <Label text="Postcode:" />
+                                                <TextField>
+                                                   <VBox.margin>
+                                                      <Insets right="5.0" />
+                                                   </VBox.margin>
+                                                </TextField>
+                                                <Label text="* Invalid - Please try again" textFill="RED" />
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                                             <children>
+                                                <Label text="State:" />
+                                                <TextField />
+                                                <Label text="* Invalid - Please try again" textFill="RED" />
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                                             <children>
+                                                <Button mnemonicParsing="false" text="Update" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </VBox>
+                              <Label text="Payment Details:" />
+                              <VBox maxHeight="466.0" maxWidth="501.0" prefHeight="466.0" prefWidth="501.0" style="-fx-border-width: 1; -fx-border-color: c4c4c4; -fx-border-radius: 2;">
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                                 <children>
+                                    <Label text="Payment method:" />
+                                    <Label text="Please select a Payment method:" />
+                                    <TabPane maxHeight="375.0" maxWidth="489.0" prefHeight="375.0" prefWidth="489.0" tabClosingPolicy="UNAVAILABLE">
+                                      <tabs>
+                                        <Tab text="VISA, Mastercard, Etc.">
+                                             <content>
+                                                <VBox prefHeight="376.0" prefWidth="489.0">
+                                                   <children>
+                                                      <GridPane>
+                                                        <columnConstraints>
+                                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                        </columnConstraints>
+                                                        <rowConstraints>
+                                                          <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                                                        </rowConstraints>
+                                                         <children>
+                                                            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+                                                               <children>
+                                                                  <Label text="Name on card:" />
+                                                                  <TextField />
+                                                                  <Label text="* Invalid - Please try again" textFill="RED" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                                                               <children>
+                                                                  <Label text="Card number:" />
+                                                                  <TextField />
+                                                                  <Label text="* Invalid - Please try again" textFill="RED" />
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </GridPane>
+                                                      <GridPane>
+                                                        <columnConstraints>
+                                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                        </columnConstraints>
+                                                        <rowConstraints>
+                                                          <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                                                        </rowConstraints>
+                                                         <children>
+                                                            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+                                                               <children>
+                                                                  <Label text="Expiration date:" />
+                                                                  <DatePicker prefHeight="25.0" prefWidth="255.0">
+                                                                     <VBox.margin>
+                                                                        <Insets right="5.0" />
+                                                                     </VBox.margin>
+                                                                  </DatePicker>
+                                                                  <Label text="* Invalid - Please try again" textFill="RED" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                                                               <children>
+                                                                  <Label text="CVV:" />
+                                                                  <TextField />
+                                                                  <Label text="* Invalid - Please try again" textFill="RED" />
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </GridPane>
+                                                   </children>
+                                                   <padding>
+                                                      <Insets left="5.0" right="5.0" />
+                                                   </padding>
+                                                </VBox>
+                                             </content>
+                                        </Tab>
+                                        <Tab text="PayPal">
+                                             <content>
+                                                <VBox prefHeight="200.0" prefWidth="100.0">
+                                                   <children>
+                                                      <Label text="You will be directed to PayPal to complete payment...">
+                                                         <VBox.margin>
+                                                            <Insets left="5.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
+                                             </content>
+                                        </Tab>
+                                      </tabs>
+                                    </TabPane>
+                                 </children>
+                              </VBox>
+                              <GridPane>
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="251.0" text="Checkout" />
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                                       <children>
+                                          <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="251.0" text="Contine Shopping" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </GridPane>
+               </children>
+            </HBox>
+            <GridPane style="-fx-border-width: 1 0 1 0; -fx-border-color: c4c4c4; -fx-background-color: e5e5e5;">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Application/Page Title..?">
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="15.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+                     <children>
+                        <Button fx:id="btnBrowseProds" mnemonicParsing="false" onAction="#browseProdsAction" text="Browse Products">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin></Button>
+                        <MenuButton mnemonicParsing="false" text="Account">
+                          <items>
+                            <MenuItem fx:id="btnEditAccount" mnemonicParsing="false" onAction="#editAccountAction" text="Edit Account" />
+                            <MenuItem fx:id="btnLogout" mnemonicParsing="false" onAction="#logoutAction" text="Logout" />
+                          </items>
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </MenuButton>
+                        <MenuButton mnemonicParsing="false" text="Cart">
+                          <items>
+                            <MenuItem fx:id="btnViewCart" mnemonicParsing="false" onAction="#viewCartAction" text="View Cart" />
+                            <MenuItem fx:id="btnCheckout" mnemonicParsing="false" onAction="#checkoutAction" text="Checkout" />
+                          </items>
+                        </MenuButton>
+                     </children>
+                  </HBox>
+               </children>
+            </GridPane>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>
