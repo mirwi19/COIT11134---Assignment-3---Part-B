@@ -14,9 +14,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 /**
@@ -39,9 +41,43 @@ public class CheckoutController implements Initializable {
     @FXML
     private MenuItem btnLogout;
     @FXML
-    private MenuItem btnViewCart;
+    private Button btnManageProducts;
     @FXML
-    private MenuItem btnCheckout;
+    private Button btnCart;
+    @FXML
+    private TextField txtAddress;
+    @FXML
+    private Label txtAddressAlert;
+    @FXML
+    private TextField txtPostcode;
+    @FXML
+    private Label txtPostcodeAlert;
+    @FXML
+    private TextField txtState;
+    @FXML
+    private Label txtStateAlert;
+    @FXML
+    private Button btnUpdateAddress;
+    @FXML
+    private TextField txtNameOnCard;
+    @FXML
+    private Label txtNameOnCardAlert;
+    @FXML
+    private TextField txtCardNum;
+    @FXML
+    private Label txtCardNumAlert;
+    @FXML
+    private DatePicker txtExpireDate;
+    @FXML
+    private Label txtExpireDateAlert;
+    @FXML
+    private TextField txtCVV;
+    @FXML
+    private Label txtCVVAlert;
+    @FXML
+    private Button btnCheckout;
+    @FXML
+    private Button btnContinueShopping;
     /**
      * Initializes the controller class.
      */
@@ -49,32 +85,7 @@ public class CheckoutController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         accountHandler = App.getAccountHandler();
     }    
-    
-    @FXML
-    private void browseProdsAction(ActionEvent event) {
-        App.changeScene(1);
-    }
-
-    @FXML
-    private void editAccountAction(ActionEvent event) {
-        App.changeScene(2);
-    }
-
-    @FXML
-    private void logoutAction(ActionEvent event) {
-        accountHandler.logout();
-    }
-
-    @FXML
-    private void viewCartAction(ActionEvent event) {
-        App.changeScene(3);
-    }
-
-    @FXML
-    private void checkoutAction(ActionEvent event) {
-        App.changeScene(3);
-    }
-    
+        
     public void displayCart(ShoppingCart cart) {
         ArrayList<Product> products = cart.getCartProducts();
         ArrayList<Integer> quantities = cart.getCartProductQty();
@@ -118,6 +129,39 @@ public class CheckoutController implements Initializable {
         
         // Display carTotal
         this.txtTotal.setText(String.format("Total: $%.2f", cartTotal));
+    }
+    
+    @FXML
+    private void browseProdsAction(ActionEvent event) {
+        App.changeScene(1);
+    }
+
+    @FXML
+    private void editAccountAction(ActionEvent event) {
+        App.changeScene(2);
+    }
+
+    @FXML
+    private void logoutAction(ActionEvent event) {
+        accountHandler.logout();
+    }
+
+    @FXML
+    private void viewCartAction(ActionEvent event) {
+        App.changeScene(3);
+    }
+
+    @FXML
+    private void manageProductsAction(ActionEvent event) {
+        App.changeScene(4);
+    }
+
+    @FXML
+    private void updateAddressAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void checkoutAction(ActionEvent event) {
     }
 
 }

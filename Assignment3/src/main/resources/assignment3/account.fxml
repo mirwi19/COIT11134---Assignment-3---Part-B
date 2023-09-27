@@ -6,6 +6,7 @@
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -50,7 +51,7 @@
                      <children>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                            <children>
-                              <Button mnemonicParsing="false" text="Delete Account" />
+                              <Button fx:id="btnDeleteAccount" mnemonicParsing="false" onAction="#deleteAccountAction" text="Delete Account" />
                            </children>
                         </VBox>
                         <GridPane>
@@ -80,7 +81,10 @@
                                        <children>
                                           <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
                                              <children>
-                                                <Label text="Account Details:" />
+                                                <Label text="Account Details:">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font></Label>
                                              </children>
                                           </VBox>
                                           <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
@@ -91,7 +95,8 @@
                                                       <Insets right="5.0" top="1.0" />
                                                    </VBox.margin>
                                                 </TextField>
-                                                <Label text="* Invalid - Please try again" textFill="RED" />
+                                                <Label fx:id="txtFirstNameAlert" text="* Invalid - Please try again" textFill="RED" visible="false" />
+                                                <Separator prefWidth="200.0" />
                                              </children>
                                           </VBox>
                                           <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -102,12 +107,13 @@
                                                       <Insets top="1.0" />
                                                    </VBox.margin>
                                                 </TextField>
-                                                <Label text="* Invalid - Please try again" textFill="RED" />
+                                                <Label fx:id="txtLastNameAlert" text="* Invalid - Please try again" textFill="RED" visible="false" />
+                                                <Separator prefWidth="200.0" />
                                              </children>
                                           </VBox>
                                           <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
                                              <children>
-                                                <Button mnemonicParsing="false" text="Update" />
+                                                <Button fx:id="btnUpdateName" mnemonicParsing="false" onAction="#updateNameAction" text="Update" />
                                              </children>
                                           </VBox>
                                        </children>
@@ -127,24 +133,26 @@
                                              <children>
                                                 <Label text="Email Address:" />
                                                 <TextField fx:id="txtEmail" />
-                                                <Label text="* Invalid - Please try again" textFill="RED" />
+                                                <Label fx:id="txtEmailAlert" text="* Invalid - Please try again" textFill="RED" visible="false" />
+                                                <Separator prefWidth="200.0" />
                                              </children>
                                           </VBox>
                                           <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                                              <children>
-                                                <Button mnemonicParsing="false" text="Update" />
+                                                <Button fx:id="btnUpdateEmail" mnemonicParsing="false" onAction="#updateEmailAction" text="Update" />
                                              </children>
                                           </VBox>
                                           <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
                                              <children>
-                                                <Label text="Phone Number (OPTIONAL???):" />
-                                                <TextField />
-                                                <Label text="* Invalid - Please try again" textFill="RED" />
+                                                <Label text="Phone Number (OPTIONAL):" />
+                                                <TextField fx:id="txtPhoneNum" />
+                                                <Label fx:id="txtPhoneNumAlert" text="* Invalid - Please try again" textFill="RED" visible="false" />
+                                                <Separator prefWidth="200.0" />
                                              </children>
                                           </VBox>
                                           <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="3">
                                              <children>
-                                                <Button mnemonicParsing="false" text="Update" />
+                                                <Button fx:id="btnUpdatePhoneNum" mnemonicParsing="false" onAction="#updatePhoneNumAction" text="Update" />
                                              </children>
                                           </VBox>
                                        </children>
@@ -163,33 +171,39 @@
                                        <children>
                                           <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
                                              <children>
-                                                <Label text="Update Password:" />
+                                                <Label text="Update Password:">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font></Label>
                                              </children>
                                           </VBox>
                                           <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                                              <children>
                                                 <Label text="Current Password:" />
-                                                <PasswordField />
-                                                <Label text="* Invalid - Please try again" textFill="RED" />
+                                                <PasswordField fx:id="txtCurrentPass" />
+                                                <Label fx:id="txtCurrentPassAlert" text="* Invalid - Please try again" textFill="RED" visible="false" />
+                                                <Separator prefWidth="200.0" />
                                              </children>
                                           </VBox>
                                           <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
                                              <children>
                                                 <Label text="New Password:" />
-                                                <PasswordField />
-                                                <Label text="* Invalid - Please try again" textFill="RED" />
+                                                <PasswordField fx:id="txtNewPass" />
+                                                <Label fx:id="txtNewPassAlert" text="* Invalid - Please try again" textFill="RED" visible="false" />
+                                                <Separator prefWidth="200.0" />
                                              </children>
                                           </VBox>
                                           <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="3">
                                              <children>
                                                 <Label text="Confirm New Password:" />
-                                                <PasswordField />
-                                                <Label text="* Invalid - Please try again" textFill="RED" />
+                                                <PasswordField fx:id="txtConfNewPass" />
+                                                <Label fx:id="txtConfNewPassAlert" text="* Invalid - Please try again" textFill="RED" visible="false" />
+                                                <Separator prefWidth="200.0" />
                                              </children>
                                           </VBox>
                                           <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="4">
                                              <children>
-                                                <Button mnemonicParsing="false" text="Update" />
+                                                <Button fx:id="btnUpdatePass" mnemonicParsing="false" onAction="#updatePassAction" text="Update" />
                                              </children>
                                           </VBox>
                                        </children>
@@ -218,14 +232,18 @@
                                              <children>
                                                 <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
                                                    <children>
-                                                      <Label text="Shipping Details:" />
+                                                      <Label text="Shipping Details:">
+                                                         <font>
+                                                            <Font name="System Bold" size="12.0" />
+                                                         </font></Label>
                                                    </children>
                                                 </VBox>
                                                 <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                                                    <children>
                                                       <Label text="Address:" />
-                                                      <TextField />
-                                                      <Label text="* Invalid - Please try again" textFill="RED" />
+                                                      <TextField fx:id="txtAddress" />
+                                                      <Label fx:id="txtAddressAlert" text="* Invalid - Please try again" textFill="RED" visible="false" />
+                                                      <Separator prefWidth="200.0" />
                                                    </children>
                                                 </VBox>
                                              </children>
@@ -243,7 +261,7 @@
                                                 <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
                                                    <children>
                                                       <Label text="Postcode:" />
-                                                      <TextField>
+                                                      <TextField fx:id="txtPostcode">
                                                          <opaqueInsets>
                                                             <Insets />
                                                          </opaqueInsets>
@@ -251,19 +269,21 @@
                                                             <Insets right="5.0" />
                                                          </VBox.margin>
                                                       </TextField>
-                                                      <Label text="* Invalid - Please try again" textFill="RED" />
+                                                      <Label fx:id="txtPostcodeAlert" text="* Invalid - Please try again" textFill="RED" visible="false" />
+                                                      <Separator prefWidth="200.0" />
                                                    </children>
                                                 </VBox>
                                                 <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                                                    <children>
                                                       <Label text="State:" />
-                                                      <TextField />
-                                                      <Label text="* Invalid - Please try again" textFill="RED" />
+                                                      <TextField fx:id="txtState" />
+                                                      <Label fx:id="txtStateAlert" text="* Invalid - Please try again" textFill="RED" visible="false" />
+                                                      <Separator prefWidth="200.0" />
                                                    </children>
                                                 </VBox>
                                                 <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                                                    <children>
-                                                      <Button mnemonicParsing="false" text="Update" />
+                                                      <Button fx:id="btnUpdateAddress" mnemonicParsing="false" onAction="#updateAddressAction" text="Update" />
                                                    </children>
                                                 </VBox>
                                              </children>
@@ -281,7 +301,10 @@
                                           <Insets left="10.0" />
                                        </GridPane.margin>
                                        <children>
-                                          <Label text="Order History:" />
+                                          <Label text="Order History:">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font></Label>
                                           <TableView fx:id="tblOrderHistory" prefHeight="200.0" prefWidth="200.0">
                                             <columns>
                                               <TableColumn editable="false" maxWidth="75.0" minWidth="75.0" prefWidth="75.0" resizable="false" sortable="false" text="ORDER #" />
@@ -312,7 +335,7 @@
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="Application/Page Title..?">
+                        <Label text="E-commerce App">
                            <font>
                               <Font size="36.0" />
                            </font>
@@ -324,6 +347,11 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <children>
+                        <Button fx:id="btnManageProducts" mnemonicParsing="false" onAction="#manageProductsAction" text="Manage Products">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </Button>
                         <Button fx:id="btnBrowseProds" mnemonicParsing="false" onAction="#browseProdsAction" text="Browse Products">
                            <HBox.margin>
                               <Insets right="5.0" />
@@ -337,12 +365,7 @@
                               <Insets right="5.0" />
                            </HBox.margin>
                         </MenuButton>
-                        <MenuButton mnemonicParsing="false" text="Cart">
-                          <items>
-                            <MenuItem fx:id="btnViewCart" mnemonicParsing="false" onAction="#viewCartAction" text="View Cart" />
-                            <MenuItem fx:id="btnCheckout" mnemonicParsing="false" onAction="#checkoutAction" text="Checkout" />
-                          </items>
-                        </MenuButton>
+                        <Button fx:id="btnCart" mnemonicParsing="false" onAction="#viewCartAction" text="Cart" />
                      </children>
                   </HBox>
                </children>

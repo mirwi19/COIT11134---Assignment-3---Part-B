@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -36,11 +37,15 @@ public class BrowseController implements Initializable {
     @FXML
     private MenuItem btnLogout;
     @FXML
-    private MenuItem btnViewCart;
-    @FXML
-    private MenuItem btnCheckout;
-    @FXML
     private ScrollPane paneProdDisplay;
+    @FXML
+    private TextField txtSearchField;
+    @FXML
+    private Button btnSearch;
+    @FXML
+    private Button btnManageProducts;
+    @FXML
+    private Button btnCart;
 
     /**
      * Initializes the controller class.
@@ -50,24 +55,23 @@ public class BrowseController implements Initializable {
         accountHandler = App.getAccountHandler();
         productHandler = App.getProductHandler();
         productList = productHandler.getProductList();
-    }    
+    }   
     
-    @FXML
-    private void browseProdsAction(ActionEvent event) {
-        App.changeScene(1);
+    public void populateScene() {
+        displayProducts(productList);
     }
     
-    public void displayProducts() {
+    private void displayProducts(ArrayList<Product> productList) {
         // Creat VBox to stack products
         VBox vBox = new VBox();
         vBox.setSpacing(10);
         
         // Create productTile
-        for (int i = 0; i < productList.size(); i+= 2) {
+        for (int i = 0; i < productList.size(); i+= 4) {
             HBox hBox = new HBox();
             hBox.setSpacing(10);
             
-            for (int j = i; j < Math.min(i +2, productList.size()); j++) { // Main.min to prevent index out of bounds
+            for (int j = i; j < Math.min(i +4, productList.size()); j++) { // Main.min to prevent index out of bounds
                 Product product = productList.get(j);
                 
                 try {
@@ -96,6 +100,33 @@ public class BrowseController implements Initializable {
         paneProdDisplay.setContent(vBox);
     }
     
+    private ArrayList<Product> searchProducts(String searchString) {
+        ArrayList<Product> searchResults = new ArrayList<>();
+        
+        for (Product product : productList) {
+            if (product.getProductName().toLowerCase().contains(searchString.toLowerCase())) {
+                searchResults.add(product);
+            }
+        }
+        
+        if (searchString.isBlank()) {
+            return productList;
+        } else {
+            return searchResults;
+        }
+    }
+    
+    @FXML
+    private void searchAction(ActionEvent event) {
+        String searchString = txtSearchField.getText().trim();
+        displayProducts(searchProducts(searchString));
+    }
+    
+    @FXML
+    private void browseProdsAction(ActionEvent event) {
+        App.changeScene(1);
+    }
+    
     @FXML
     private void editAccountAction(ActionEvent event) {
         App.changeScene(2);
@@ -112,8 +143,8 @@ public class BrowseController implements Initializable {
     }
 
     @FXML
-    private void checkoutAction(ActionEvent event) {
-        App.changeScene(3);
+    private void manageProductsAction(ActionEvent event) {
+        App.changeScene(4);
     }
     
 }

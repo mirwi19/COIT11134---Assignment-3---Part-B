@@ -1,11 +1,6 @@
 package assignment3;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-
-import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -20,12 +15,14 @@ public class App extends Application {
     private static Scene sceneBrowse;
     private static Scene sceneAccount;
     private static Scene sceneCheckout;
+    private static Scene sceneManage;
     private static Stage mainStage;
     
     private static LoginController loginController;
     private static BrowseController browseController;
     private static AccountController accountController;
     private static CheckoutController checkoutController;
+    private static ManageController manageController;
     
     private static AccountHandler accountHandler;
     private static ProductHandler productHandler;
@@ -48,23 +45,26 @@ public class App extends Application {
         FXMLLoader browseLoader = loadFXML("browse");
         FXMLLoader accountLoader = loadFXML("account");
         FXMLLoader checkoutLoader = loadFXML("checkout");
+        FXMLLoader manageLoader = loadFXML("manage");
         
         // Get Controllers from FXMLLoaders
         loginController = loginLoader.getController();
         browseController = browseLoader.getController();
         accountController = accountLoader.getController();
         checkoutController = checkoutLoader.getController();
+        manageController = manageLoader.getController();
         
         // Create scenes
         sceneLogin = new Scene(loginLoader.getRoot());
         sceneBrowse = new Scene(browseLoader.getRoot());
         sceneAccount = new Scene(accountLoader.getRoot());
         sceneCheckout = new Scene(checkoutLoader.getRoot());
+        sceneManage = new Scene(manageLoader.getRoot());
         
         // Set stage
         mainStage = stage;
         mainStage.setScene(sceneLogin);
-        mainStage.setTitle("Application name here... - login");
+        mainStage.setTitle("E-commerce App - Login");
         mainStage.show();
     }
     
@@ -78,22 +78,27 @@ public class App extends Application {
         switch (sc) {
             case 0:
                 mainStage.setScene(sceneLogin);
-                mainStage.setTitle("Application name here... - loign");
+                mainStage.setTitle("E-commerce App - Loign");
                 break;
             case 1:
                 mainStage.setScene(sceneBrowse);
-                mainStage.setTitle("Application name here... - browse");
-                browseController.displayProducts();
+                mainStage.setTitle("E-commerce App - Browse");
+                browseController.populateScene();
                 break;
             case 2:
                 mainStage.setScene(sceneAccount);
-                mainStage.setTitle("Application name here... = account");
+                mainStage.setTitle("E-commerce App - Manage Account");
                 accountController.displayUserDetails();
                 break;
             case 3:
                 mainStage.setScene(sceneCheckout);
-                mainStage.setTitle("Application name here... - checkout");
+                mainStage.setTitle("E-commerce App - Checkout");
                 checkoutController.displayCart(shoppingCart);
+                break;
+            case 4:
+                mainStage.setScene(sceneManage);
+                mainStage.setTitle("E-commerece App - Manage Products");
+                manageController.populateScene();
                 break;
         }
     }
@@ -112,6 +117,10 @@ public class App extends Application {
 
     public static CheckoutController getCheckoutController() {
         return checkoutController;
+    }
+    
+    public static ManageController getManageController() {
+        return manageController;
     }
     
     public static AccountHandler getAccountHandler() {

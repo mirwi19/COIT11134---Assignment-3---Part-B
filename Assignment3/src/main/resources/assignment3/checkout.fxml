@@ -7,6 +7,7 @@
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
@@ -48,8 +49,14 @@
                      <children>
                         <VBox prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <Label text="Your cart:" />
-                              <ScrollPane fx:id="paneCartDisplay" hbarPolicy="NEVER" prefHeight="692.0" prefWidth="502.0" vbarPolicy="ALWAYS" />
+                              <Label text="Your Cart:">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Label>
+                              <ScrollPane fx:id="paneCartDisplay" hbarPolicy="NEVER" prefHeight="692.0" prefWidth="502.0" vbarPolicy="ALWAYS">
+                                 <padding>
+                                    <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                                 </padding></ScrollPane>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                  <children>
                                     <Label fx:id="txtTotal" text="Total:">
@@ -72,7 +79,10 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </GridPane.margin>
                            <children>
-                              <Label text="Shipping Details:" />
+                              <Label text="Shipping Details:">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Label>
                               <VBox maxHeight="160.0" maxWidth="500.0" prefHeight="160.0" prefWidth="500.0" style="-fx-border-width: 1; -fx-border-color: c4c4c4; -fx-border-radius: 2;">
                                  <children>
                                     <GridPane>
@@ -86,8 +96,9 @@
                                           <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
                                              <children>
                                                 <Label text="Address:" />
-                                                <TextField />
-                                                <Label text="* Invalid - Please try again" textFill="RED" />
+                                                <TextField fx:id="txtAddress" />
+                                                <Label fx:id="txtAddressAlert" text="* Invalid - Please try again" textFill="RED" visible="false" />
+                                                <Separator prefWidth="200.0" />
                                              </children>
                                           </VBox>
                                        </children>
@@ -105,24 +116,26 @@
                                           <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
                                              <children>
                                                 <Label text="Postcode:" />
-                                                <TextField>
+                                                <TextField fx:id="txtPostcode">
                                                    <VBox.margin>
                                                       <Insets right="5.0" />
                                                    </VBox.margin>
                                                 </TextField>
-                                                <Label text="* Invalid - Please try again" textFill="RED" />
+                                                <Label fx:id="txtPostcodeAlert" text="* Invalid - Please try again" textFill="RED" visible="false" />
+                                                <Separator prefWidth="200.0" />
                                              </children>
                                           </VBox>
                                           <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                                              <children>
                                                 <Label text="State:" />
-                                                <TextField />
-                                                <Label text="* Invalid - Please try again" textFill="RED" />
+                                                <TextField fx:id="txtState" />
+                                                <Label fx:id="txtStateAlert" text="* Invalid - Please try again" textFill="RED" visible="false" />
+                                                <Separator prefWidth="200.0" />
                                              </children>
                                           </VBox>
                                           <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                                              <children>
-                                                <Button mnemonicParsing="false" text="Update" />
+                                                <Button fx:id="btnUpdateAddress" mnemonicParsing="false" onAction="#updateAddressAction" text="Update" />
                                              </children>
                                           </VBox>
                                        </children>
@@ -132,7 +145,10 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </padding>
                               </VBox>
-                              <Label text="Payment Details:" />
+                              <Label text="Payment Details:">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Label>
                               <VBox maxHeight="466.0" maxWidth="501.0" prefHeight="466.0" prefWidth="501.0" style="-fx-border-width: 1; -fx-border-color: c4c4c4; -fx-border-radius: 2;">
                                  <padding>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -158,15 +174,17 @@
                                                             <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
                                                                <children>
                                                                   <Label text="Name on card:" />
-                                                                  <TextField />
-                                                                  <Label text="* Invalid - Please try again" textFill="RED" />
+                                                                  <TextField fx:id="txtNameOnCard" />
+                                                                  <Label fx:id="txtNameOnCardAlert" text="* Invalid - Please try again" textFill="RED" visible="false" />
+                                                                  <Separator prefWidth="200.0" />
                                                                </children>
                                                             </VBox>
                                                             <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                                                                <children>
                                                                   <Label text="Card number:" />
-                                                                  <TextField />
-                                                                  <Label text="* Invalid - Please try again" textFill="RED" />
+                                                                  <TextField fx:id="txtCardNum" />
+                                                                  <Label fx:id="txtCardNumAlert" text="* Invalid - Please try again" textFill="RED" visible="false" />
+                                                                  <Separator prefWidth="200.0" />
                                                                </children>
                                                             </VBox>
                                                          </children>
@@ -183,19 +201,21 @@
                                                             <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
                                                                <children>
                                                                   <Label text="Expiration date:" />
-                                                                  <DatePicker prefHeight="25.0" prefWidth="255.0">
+                                                                  <DatePicker fx:id="txtExpireDate" prefHeight="25.0" prefWidth="255.0">
                                                                      <VBox.margin>
                                                                         <Insets right="5.0" />
                                                                      </VBox.margin>
                                                                   </DatePicker>
-                                                                  <Label text="* Invalid - Please try again" textFill="RED" />
+                                                                  <Label fx:id="txtExpireDateAlert" text="* Invalid - Please try again" textFill="RED" visible="false" />
+                                                                  <Separator prefWidth="200.0" />
                                                                </children>
                                                             </VBox>
                                                             <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                                                                <children>
                                                                   <Label text="CVV:" />
-                                                                  <TextField />
-                                                                  <Label text="* Invalid - Please try again" textFill="RED" />
+                                                                  <TextField fx:id="txtCVV" />
+                                                                  <Label fx:id="txtCVVAlert" text="* Invalid - Please try again" textFill="RED" visible="false" />
+                                                                  <Separator prefWidth="200.0" />
                                                                </children>
                                                             </VBox>
                                                          </children>
@@ -235,12 +255,12 @@
                                  <children>
                                     <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                                        <children>
-                                          <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="251.0" text="Checkout" />
+                                          <Button fx:id="btnCheckout" mnemonicParsing="false" onAction="#checkoutAction" prefHeight="60.0" prefWidth="251.0" text="Checkout" />
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                                        <children>
-                                          <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="251.0" text="Contine Shopping" />
+                                          <Button fx:id="btnContinueShopping" mnemonicParsing="false" onAction="#browseProdsAction" prefHeight="60.0" prefWidth="251.0" text="Contine Shopping" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -262,7 +282,7 @@
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="Application/Page Title..?">
+                        <Label text="E-commerce App">
                            <font>
                               <Font size="36.0" />
                            </font>
@@ -274,6 +294,11 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <children>
+                        <Button fx:id="btnManageProducts" mnemonicParsing="false" onAction="#manageProductsAction" text="Manage Products">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </Button>
                         <Button fx:id="btnBrowseProds" mnemonicParsing="false" onAction="#browseProdsAction" text="Browse Products">
                            <HBox.margin>
                               <Insets right="5.0" />
@@ -287,12 +312,7 @@
                               <Insets right="5.0" />
                            </HBox.margin>
                         </MenuButton>
-                        <MenuButton mnemonicParsing="false" text="Cart">
-                          <items>
-                            <MenuItem fx:id="btnViewCart" mnemonicParsing="false" onAction="#viewCartAction" text="View Cart" />
-                            <MenuItem fx:id="btnCheckout" mnemonicParsing="false" onAction="#checkoutAction" text="Checkout" />
-                          </items>
-                        </MenuButton>
+                        <Button fx:id="btnCart" mnemonicParsing="false" onAction="#viewCartAction" text="Cart" />
                      </children>
                   </HBox>
                </children>

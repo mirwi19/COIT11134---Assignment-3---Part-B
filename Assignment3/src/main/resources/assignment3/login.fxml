@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
@@ -28,7 +29,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-border-width: 1 0 1 0; -fx-border-color: c4c4c4; -fx-background-color: e5e5e5;">
                <children>
-                  <Label text="Application/Page Title..?">
+                  <Label text="E-commerce App">
                      <font>
                         <Font size="36.0" />
                      </font>
@@ -85,7 +86,7 @@
                                                             <Insets top="17.0" />
                                                          </VBox.margin>
                                                       </TextField>
-                                                      <Label text="* Invalid Email - Please try again" textFill="RED" />
+                                                      <Label fx:id="txtLoginEmailAlert" text="* Invalid Email - Please try again" textFill="RED" visible="false" />
                                                    </children>
                                                 </VBox>
                                                 <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
@@ -104,7 +105,7 @@
                                                             <Insets top="17.0" />
                                                          </VBox.margin>
                                                       </PasswordField>
-                                                      <Label text="* Invalid Password - Please try again" textFill="RED" />
+                                                      <Label fx:id="txtLoginPasswordAlert" text="* Invalid Password - Please try again" textFill="RED" visible="false" />
                                                    </children>
                                                 </VBox>
                                              </children>
@@ -153,19 +154,21 @@
                                                       <VBox maxHeight="60.0" prefHeight="60.0" prefWidth="100.0">
                                                          <children>
                                                             <Label text="First Name:" />
-                                                            <TextField>
+                                                            <TextField fx:id="txtRegFirstName">
                                                                <VBox.margin>
                                                                   <Insets right="5.0" />
                                                                </VBox.margin>
                                                             </TextField>
-                                                            <Label text="* Invalid - Please try again" textFill="RED" />
+                                                            <Label fx:id="txtRegFirstNameAlert" text="* Invalid - Please try again" textFill="RED" visible="false" />
+                                                            <Separator prefWidth="200.0" />
                                                          </children>
                                                       </VBox>
                                                       <VBox maxHeight="60.0" prefHeight="60.0" prefWidth="100.0" GridPane.columnIndex="1">
                                                          <children>
                                                             <Label text="Last Name:" />
-                                                            <TextField />
-                                                            <Label text="* Invalid - Please try again" textFill="RED" />
+                                                            <TextField fx:id="txtRegLastName" />
+                                                            <Label fx:id="txtRegLastNameAlert" text="* Invalid - Please try again" textFill="RED" visible="false" />
+                                                            <Separator prefWidth="200.0" />
                                                          </children>
                                                       </VBox>
                                                    </children>
@@ -184,8 +187,9 @@
                                                       <VBox maxHeight="60.0" prefHeight="60.0" prefWidth="100.0">
                                                          <children>
                                                             <Label text="Address:" />
-                                                            <TextField />
-                                                            <Label text="* Invalid - Please try again" textFill="RED" />
+                                                            <TextField fx:id="txtRegAddress" />
+                                                            <Label fx:id="txtRegAddressAlert" text="* Invalid - Please try again" textFill="RED" visible="false" />
+                                                            <Separator prefWidth="200.0" />
                                                          </children>
                                                       </VBox>
                                                    </children>
@@ -205,19 +209,21 @@
                                                       <VBox maxHeight="60.0" prefHeight="60.0" prefWidth="100.0">
                                                          <children>
                                                             <Label text="Postcode:" />
-                                                            <TextField>
+                                                            <TextField fx:id="txtRegPostcode">
                                                                <VBox.margin>
                                                                   <Insets right="5.0" />
                                                                </VBox.margin>
                                                             </TextField>
-                                                            <Label text="* Invalid - Please try again" textFill="RED" />
+                                                            <Label fx:id="txtRegPostcodeAlert" text="* Invalid - Please try again" textFill="RED" visible="false" />
+                                                            <Separator prefWidth="200.0" />
                                                          </children>
                                                       </VBox>
                                                       <VBox maxHeight="60.0" prefHeight="60.0" prefWidth="100.0" GridPane.columnIndex="1">
                                                          <children>
                                                             <Label text="State:" />
-                                                            <TextField />
-                                                            <Label text="* Invalid - Please try again" textFill="RED" />
+                                                            <TextField fx:id="txtRegState" />
+                                                            <Label fx:id="txtRegStateAlert" text="* Invalid - Please try again" textFill="RED" visible="false" />
+                                                            <Separator prefWidth="200.0" />
                                                          </children>
                                                       </VBox>
                                                    </children>
@@ -236,46 +242,51 @@
                                                    <children>
                                                       <VBox maxHeight="60.0" prefHeight="60.0" prefWidth="100.0">
                                                          <children>
-                                                            <Label text="Phone Number (OPTIONAL???):" />
-                                                            <TextField />
-                                                            <Label text="* Invalid - Please try again" textFill="RED" />
+                                                            <Label text="Phone Number (OPTIONAL):" />
+                                                            <TextField fx:id="txtRegPhoneNum" />
+                                                            <Label fx:id="txtRegPhoneNumAlert" text="* Invalid - Please try again" textFill="RED" visible="false" />
+                                                            <Separator prefWidth="200.0" />
                                                          </children>
                                                       </VBox>
                                                       <VBox maxHeight="60.0" prefHeight="60.0" prefWidth="100.0" GridPane.rowIndex="1">
                                                          <children>
                                                             <Label text="Email:" />
-                                                            <TextField />
-                                                            <Label text="* Invalid - Please try again" textFill="RED" />
+                                                            <TextField fx:id="txtRegEmail" />
+                                                            <Label fx:id="txtRegEmailAlert" text="* Invalid - Please try again" textFill="RED" visible="false" />
                                                          </children>
                                                       </VBox>
                                                       <VBox maxHeight="60.0" prefHeight="60.0" prefWidth="100.0" GridPane.rowIndex="2">
                                                          <children>
+                                                            <Separator prefWidth="200.0" />
                                                             <Label text="Confirm Email:" />
-                                                            <TextField />
-                                                            <Label text="* Invalid - Please try again" textFill="RED" />
+                                                            <TextField fx:id="txtRegConfEmail" />
+                                                            <Label fx:id="txtRegConfEmailAlert" text="* Invalid - Please try again" textFill="RED" visible="false" />
+                                                            <Separator prefWidth="200.0" />
                                                          </children>
                                                       </VBox>
                                                       <VBox maxHeight="60.0" prefHeight="60.0" prefWidth="100.0" GridPane.rowIndex="3">
                                                          <children>
                                                             <Label text="Password:" />
-                                                            <PasswordField />
-                                                            <Label text="* Invalid - Please try again" textFill="RED" />
+                                                            <PasswordField fx:id="txtRegPass" />
+                                                            <Label fx:id="txtRegPassAlert" text="* Invalid - Please try again" textFill="RED" visible="false" />
+                                                            <Separator prefWidth="200.0" />
                                                          </children>
                                                       </VBox>
                                                       <VBox maxHeight="60.0" prefHeight="60.0" prefWidth="100.0" GridPane.rowIndex="4">
                                                          <children>
                                                             <Label text="Confirm Password:" />
-                                                            <PasswordField />
-                                                            <Label text="* Invalid - Please try again" textFill="RED" />
+                                                            <PasswordField fx:id="txtRegConfPass" />
+                                                            <Label fx:id="txtRegConfPassAlert" text="* Invalid - Please try again" textFill="RED" visible="false" />
                                                          </children>
                                                       </VBox>
                                                    </children>
                                                 </GridPane>
+                                                <Separator prefWidth="200.0" />
                                              </children>
                                           </VBox>
                                           <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
                                              <children>
-                                                <Button mnemonicParsing="false" text="Register">
+                                                <Button fx:id="btnRegister" mnemonicParsing="false" onAction="#registerAction" text="Register">
                                                    <VBox.margin>
                                                       <Insets top="10.0" />
                                                    </VBox.margin></Button>
