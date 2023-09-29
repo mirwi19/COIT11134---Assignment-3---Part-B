@@ -96,6 +96,36 @@ public class LoginController implements Initializable {
 
     @FXML
     private void registerAction(ActionEvent event) {
+	String firstName = txtRegFirstName.getText();
+	String lastName = txtRegLastName.getText();
+	String address = txtRegAddress.getText();
+	String postcodeString = txtRegPostcode.getText();
+	String state = txtRegState.getText();
+	String phoneNumber = txtRegPhoneNum.getText();
+	String email = txtRegEmail.getText();
+	String confEmail = txtRegConfEmail.getText();
+	String password = txtRegPass.getText();
+	String confPassword = txtRegConfPass.getText();
+	int postcodeInt;
+	boolean inputValid = DataValidator.validateAll(firstName, lastName, address, postcodeString, state, phoneNumber, email, confEmail, password, confPassword);
+	
+	txtRegFirstNameAlert.setVisible(!DataValidator.validateName(firstName));
+	txtRegLastNameAlert.setVisible(!DataValidator.validateName(lastName));
+	txtRegAddressAlert.setVisible(!DataValidator.validateAddress(address));
+	txtRegPostcodeAlert.setVisible(!DataValidator.validatePostcode(postcodeString));
+	txtRegStateAlert.setVisible(!DataValidator.validateState(state));
+	txtRegPhoneNumAlert.setVisible(!DataValidator.validatePhoneNum(phoneNumber));
+	txtRegEmailAlert.setVisible(!DataValidator.validateEmail(email));
+	txtRegConfEmailAlert.setVisible(!DataValidator.validateConfEmail(email, confEmail));
+	txtRegPassAlert.setVisible(!DataValidator.validatePassword(password));
+	txtRegConfPassAlert.setVisible(!DataValidator.validateConfPassword(password, confPassword));
+
+	if (inputValid) {
+	    postcodeInt = Integer.parseInt(postcodeString);
+	    
+	    
+	    System.out.println("User created");
+	}
     }
 
 }
