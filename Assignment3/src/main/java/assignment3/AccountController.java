@@ -101,6 +101,13 @@ public class AccountController implements Initializable {
         this.txtFirstName.setText(accountHandler.getCurrentUser().getFirstName());
         this.txtLastName.setText(accountHandler.getCurrentUser().getLastName());
         this.txtEmail.setText(accountHandler.getCurrentUser().getEmail());
+	this.txtPhoneNum.setText(accountHandler.getCurrentUser().getPhoneNum());
+	this.txtAddress.setText(accountHandler.getCurrentUser().getAddress());
+	this.txtPostcode.setText(Integer.toString(accountHandler.getCurrentUser().getPostcode()));
+	this.txtState.setText(accountHandler.getCurrentUser().getState());
+	this.txtCurrentPass.setText("");
+	this.txtNewPass.setText("");
+	this.txtConfNewPass.setText("");
     }
 
     @FXML
@@ -130,26 +137,110 @@ public class AccountController implements Initializable {
 
     @FXML
     private void deleteAccountAction(ActionEvent event) {
+	accountHandler.removeUser();
     }
 
     @FXML
     private void updateNameAction(ActionEvent event) {
+	//Set name inputs to variables
+	String firstName = txtFirstName.getText().trim();
+	String lastName = txtLastName.getText().trim();
+	
+	//Run validators for name fields display alerts if invalid
+	txtFirstNameAlert.setVisible(!DataValidator.validateName(firstName));
+	txtLastNameAlert.setVisible(!DataValidator.validateName(lastName));
+	
+	//Check if names are valid
+	if (DataValidator.validateName(firstName) && DataValidator.validateName(lastName)) {
+	    //Set users name to new names
+	    accountHandler.getCurrentUser().setFirstName(firstName);
+	    accountHandler.getCurrentUser().setLastName(lastName);
+	    System.out.println("Name updated");
+	}
     }
 
     @FXML
     private void updateEmailAction(ActionEvent event) {
+	//Set email input to variable
+	String email = txtEmail.getText().trim();
+	
+	//Run validator for email display alert if invalid
+	txtEmailAlert.setVisible(!DataValidator.validateEmail(email));
+	
+	//Check if email valid
+	if (DataValidator.validateEmail(email)) {
+	    //Set users email to new email
+	    accountHandler.getCurrentUser().setEmail(email);
+	    System.out.println("Email updated");
+	}
     }
 
     @FXML
     private void updatePhoneNumAction(ActionEvent event) {
+	//Set phone number input to variable
+	String phoneNum = txtPhoneNum.getText().trim();
+	
+	//Run validator for phone number display alert if invalid
+	txtPhoneNumAlert.setVisible(!DataValidator.validatePhoneNum(phoneNum));
+	
+	//Check if phone number valid
+	if (DataValidator.validatePhoneNum(phoneNum)) {
+	    //Set users phone number to new phone number
+	    accountHandler.getCurrentUser().setPhoneNum(phoneNum);
+	    System.out.println("Phone number updated");
+	}
     }
 
     @FXML
     private void updatePassAction(ActionEvent event) {
+	//Set password inputs to variables
+	String currentPassword = accountHandler.getCurrentUser().getPassword();
+	String currentConfPassword = txtCurrentPass.getText().trim();
+	String newPassword = txtNewPass.getText().trim();
+	String newConfPass = txtConfNewPass.getText().trim();
+	
+	//Run validators for password fields display alert if invalid
+	txtCurrentPassAlert.setVisible(!DataValidator.validateConfPassword(currentPassword, currentConfPassword));
+	txtNewPassAlert.setVisible(!DataValidator.validatePassword(newPassword));
+	txtConfNewPassAlert.setVisible(!DataValidator.validateConfPassword(newPassword, newConfPass));
+	
+	//Check if password fields are valid
+	if (DataValidator.validateConfPassword(currentPassword, currentConfPassword) && DataValidator.validatePassword(newPassword) && DataValidator.validateConfPassword(newPassword, newConfPass)) {
+	    //Set users password to new password
+	    accountHandler.getCurrentUser().setPassword(newPassword);
+	    System.out.println("Password updated");
+
+	    //Set all password fields blank
+	    this.txtCurrentPass.setText("");
+	    this.txtNewPass.setText("");
+	    this.txtConfNewPass.setText("");
+	}
     }
 
+    //not done
     @FXML
     private void updateAddressAction(ActionEvent event) {
+	//Set address inputs to variables
+	String address = txtAddress.getText().trim();
+	String postcode = txtPostcode.getText().trim();
+	String state = txtState.getText().trim();
+	
+	//Run validators for address fields display alert if invalid
+	txtAddressAlert.setVisible(!DataValidator.validateAddress(address));
+	txtPostcodeAlert.setVisible(!DataValidator.validatePostcode(postcode));
+	txtStateAlert.setVisible(!DataValidator.validateState(state));
+	
+	//Check if address fields are valid
+	if (DataValidator.validateAddress(address) && DataValidator.validatePostcode(postcode) && DataValidator.validateState(state)) {
+	    //Parse post into int
+	    int postcodeInt = Integer.parseInt(postcode);
+	    
+	    //Set users address variables to new values
+	    accountHandler.getCurrentUser().setAddress(address);
+	    accountHandler.getCurrentUser().setPostcode(postcodeInt);
+	    accountHandler.getCurrentUser().setState(state);
+	    System.out.println("Email updated");
+	}
     }
     
 }

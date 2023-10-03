@@ -48,11 +48,16 @@ public class AccountHandler {
                     // Tokenize user details
                     StringTokenizer userTokenizer = new StringTokenizer(dataEntry, ",");
                     if (userTokenizer.hasMoreTokens()) {
-                        String uniqueID = userTokenizer.nextToken().trim();
+                        int uniqueID = Integer.parseInt(userTokenizer.nextToken().trim());
                         String password = userTokenizer.nextToken().trim();
                         String firstName = userTokenizer.nextToken().trim();
                         String lastName = userTokenizer.nextToken().trim();
                         String email = userTokenizer.nextToken().trim();
+			String address = userTokenizer.nextToken().trim();
+			int postcode = Integer.parseInt(userTokenizer.nextToken().trim());
+			String state = userTokenizer.nextToken().trim();
+			String phoneNum = userTokenizer.nextToken().trim();
+			boolean isAdmin = Boolean.parseBoolean(userTokenizer.nextToken().trim());
                         
                         // Removing ':' separator
                         if (email.endsWith(":")) { // Email is currently the last token, change to match last token
@@ -60,7 +65,7 @@ public class AccountHandler {
                         }
                         
                         // Create User
-                        currentUser = new User(uniqueID, password, firstName, lastName, email);
+                        currentUser = new User(uniqueID, password, firstName, lastName, email, address, postcode, state, phoneNum, isAdmin);
                         // Debug: Printing currentUser
                         System.out.println("User added: " + currentUser.getUniqueID() + ", " + currentUser.getFirstName() + ", " + currentUser.getLastName() + ", " + currentUser.getEmail());
                         addUser(currentUser);
@@ -96,11 +101,19 @@ public class AccountHandler {
     }
     
     public void addUser(User userToAdd) {
+	//Add new user to arraylist
         this.userList.add(userToAdd);
+	//Call save to file method
+	saveUserData();
     }
     
     public void removeUser() {
-        
+	//Remove current user from arraylist
+	this.userList.remove(currentUser);
+	//Call save to file method
+	saveUserData();
+	//Change to login/registration scene
+	App.changeScene(0);
     }
     
     public boolean authenticateUser(String emailInput, String passwordInput) {
@@ -140,6 +153,35 @@ public class AccountHandler {
         currentUser = null;
         App.changeScene(0);
         
+    }
+    
+    public int generateID() {
+	//Minimum userID
+	int id = 1;
+	//Check if id exists using findID() method
+	int index = findID(id); 
+	
+	//If id does exist continue incrementing and checking until it doesn't
+	while (index != -1) {
+	    id++;
+	    index = findID(id);
+	}
+	
+	return id;
+    }
+    
+    public int findID(int input) {
+	//Variable to store index of id initialised to -1 
+	int index = -1;
+	
+	//Cycle through each user to check if id exists
+	for(int i = 0; i < userList.size(); i++) {
+	    if (input == userList.get(i).getUniqueID()) {
+		index = i;	    
+	    }
+	}
+	
+	return index;
     }
     
     public void saveUserData(){

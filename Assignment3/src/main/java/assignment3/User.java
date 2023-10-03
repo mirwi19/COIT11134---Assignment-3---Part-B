@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author Matthew Irwin
  */
 public class User {
-    private String uniqueID;
+    private int uniqueID;
     private String password;
     private String firstName;
     private String lastName;
@@ -22,21 +22,27 @@ public class User {
     private String state;
     private String phoneNum;
     private ArrayList<Order> orderHistory;
+    private boolean isAdmin;
     
-    public User(String uniqueID, String password, String firstName, String lastName, String email) {
+    public User(int uniqueID, String password, String firstName, String lastName, String email, String address, int postcode, String state, String phoneNum, boolean isAdmin) {
         this.uniqueID = uniqueID;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+	this.address = address;
+	this.postcode = postcode;
+	this.state = state;
+	this.phoneNum = phoneNum;
+	this.isAdmin = isAdmin;
         this.orderHistory = new ArrayList<>();
     }
 
-    public String getUniqueID() {
+    public int getUniqueID() {
         return uniqueID;
     }
 
-    public void setUniqueID(String uniqueID) {
+    public void setUniqueID(int uniqueID) {
         this.uniqueID = uniqueID;
     }
 

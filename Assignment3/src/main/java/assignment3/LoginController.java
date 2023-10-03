@@ -96,19 +96,23 @@ public class LoginController implements Initializable {
 
     @FXML
     private void registerAction(ActionEvent event) {
-	String firstName = txtRegFirstName.getText();
-	String lastName = txtRegLastName.getText();
-	String address = txtRegAddress.getText();
-	String postcodeString = txtRegPostcode.getText();
-	String state = txtRegState.getText();
-	String phoneNumber = txtRegPhoneNum.getText();
-	String email = txtRegEmail.getText();
-	String confEmail = txtRegConfEmail.getText();
-	String password = txtRegPass.getText();
-	String confPassword = txtRegConfPass.getText();
+	//Set input fields to variables trim to remove spaces before and after string 
+	String firstName = txtRegFirstName.getText().trim();
+	String lastName = txtRegLastName.getText().trim();
+	String address = txtRegAddress.getText().trim();
+	String postcodeString = txtRegPostcode.getText().trim();
+	String state = txtRegState.getText().trim();
+	String phoneNumber = txtRegPhoneNum.getText().trim();
+	String email = txtRegEmail.getText().trim();
+	String confEmail = txtRegConfEmail.getText().trim();
+	String password = txtRegPass.getText().trim();
+	String confPassword = txtRegConfPass.getText().trim();
+	//Variable to store integer of postcode
 	int postcodeInt;
+	//Variable to store whether all inputs are valid
 	boolean inputValid = DataValidator.validateAll(firstName, lastName, address, postcodeString, state, phoneNumber, email, confEmail, password, confPassword);
 	
+	//Run validators for each field to display alert messages
 	txtRegFirstNameAlert.setVisible(!DataValidator.validateName(firstName));
 	txtRegLastNameAlert.setVisible(!DataValidator.validateName(lastName));
 	txtRegAddressAlert.setVisible(!DataValidator.validateAddress(address));
@@ -120,11 +124,35 @@ public class LoginController implements Initializable {
 	txtRegPassAlert.setVisible(!DataValidator.validatePassword(password));
 	txtRegConfPassAlert.setVisible(!DataValidator.validateConfPassword(password, confPassword));
 
+	//If all inputs valid
 	if (inputValid) {
+	    
+	    //Parse postcode into int
 	    postcodeInt = Integer.parseInt(postcodeString);
+	    //Use generateID() method to get a new uniqueID
+	    int id = App.getAccountHandler().generateID();
+	    //Set isAdmin for new accounts false
+	    boolean isAdmin = false;
+	    //Display userID
+	    System.out.println("UserID: " + id);
 	    
-	    
+	    //Create new user object
+	    User user = new User(id, password, firstName, lastName, email, address, postcodeInt, state, phoneNumber, isAdmin);
+	    //Add new user arraylist using addUser() method
+	    App.getAccountHandler().addUser(user);
 	    System.out.println("User created");
+	    
+	    //Set all fields blank
+	    txtRegFirstName.setText("");
+	    txtRegLastName.setText("");
+	    txtRegAddress.setText("");
+	    txtRegPostcode.setText("");
+	    txtRegState.setText("");
+	    txtRegPhoneNum.setText("");
+	    txtRegEmail.setText("");
+	    txtRegConfEmail.setText("");
+	    txtRegPass.setText("");
+	    txtRegConfPass.setText("");
 	}
     }
 
