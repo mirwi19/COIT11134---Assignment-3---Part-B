@@ -5,8 +5,6 @@
 
 package assignment3;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author Matthew Irwin
@@ -21,7 +19,6 @@ public class User {
     private int postcode;
     private String state;
     private String phoneNum;
-    private ArrayList<Order> orderHistory;
     private boolean isAdmin;
     
     public User(int uniqueID, String password, String firstName, String lastName, String email, String address, int postcode, String state, String phoneNum, boolean isAdmin) {
@@ -35,7 +32,6 @@ public class User {
 	this.state = state;
 	this.phoneNum = phoneNum;
 	this.isAdmin = isAdmin;
-        this.orderHistory = new ArrayList<>();
     }
 
     public int getUniqueID() {
@@ -109,9 +105,5 @@ public class User {
     public void setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
     }
-
-    public ArrayList<Order> getOrderHistory() {
-        return orderHistory;
-    }    
 
 }

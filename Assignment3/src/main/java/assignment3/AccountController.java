@@ -15,7 +15,9 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-
+import javafx.collections.ObservableList;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.TableColumn;
 /**
  * FXML Controller class
  *
@@ -88,6 +90,19 @@ public class AccountController implements Initializable {
     private TextField txtState;
     @FXML
     private Button btnUpdateAddress;
+    @FXML
+    private TableView<Order> orderHistoryTable;
+    @FXML
+    private TableColumn<Order, String> orderNumberColumn;
+    @FXML
+    private TableColumn<Order, String> dateColumn;
+    @FXML
+    private TableColumn<Order, String> shippedToColumn;
+    @FXML
+    private TableColumn<Order, Double> orderTotalColumn;
+    @FXML
+    private TableColumn<Order, String> statusColumn;
+    
 
     /**
      * Initializes the controller class.
@@ -95,6 +110,23 @@ public class AccountController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         accountHandler = App.getAccountHandler();
+        initializeOrderHistoryTable();
+    }
+    
+    // Load the order history from the text file
+    public void loadOrderHistory() {
+        ObservableList<Order> loadedOrderHistory = OrderHistoryHandler.loadOrderHistoryFromTextFile();
+        orderHistoryTable.setItems(loadedOrderHistory);
+    }
+    
+    // Initialize the order history table
+    private void initializeOrderHistoryTable() {
+        orderNumberColumn.setCellValueFactory(new PropertyValueFactory<>("orderNum"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        shippedToColumn.setCellValueFactory(new PropertyValueFactory<>("shippedTo"));
+        orderTotalColumn.setCellValueFactory(new PropertyValueFactory<>("orderTotal"));
+        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+    
     }
     
     public void displayUserDetails() {

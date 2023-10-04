@@ -15,7 +15,9 @@ import java.util.StringTokenizer;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
-
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 /**
  *
  * @author Matthew Irwin
@@ -121,7 +123,20 @@ public class ProductHandler {
         });
     }
     
+    //Save Product data to file
     public void saveProductData() {
-        
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(productListFile))) {
+            for (Product product : productList) {
+                String productData = String.format("%s, %s, %.2f, %d",
+                        product.getProductID(), product.getProductName(),
+                        product.getPrice(), product.getStock());
+                writer.write(productData);
+                writer.newLine();
+            }
+            System.out.println("Product data has been successfully saved to file.");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Error saving product data to file.");
+        }
     }
 }

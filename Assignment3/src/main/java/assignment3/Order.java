@@ -15,13 +15,15 @@ public class Order {
     private String shippedTo;
     private double orderTotal;
     private String status;
+    private String userEmail;
 
-    public Order(String orderNum, String date, String shippedTo, double orderTotal, String status) {
+    public Order(String orderNum, String date, String shippedTo, double orderTotal, String status, String userEmail) {
         this.orderNum = orderNum;
         this.date = date;
         this.shippedTo = shippedTo;
         this.orderTotal = orderTotal;
         this.status = status;
+        this.userEmail = userEmail;
     }
 
     public String getOrderNum() {
@@ -64,6 +66,12 @@ public class Order {
         this.status = status;
     }
     
+    public String getUserEmail() {
+        return userEmail;
+    }
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
     
 
 }

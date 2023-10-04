@@ -21,7 +21,7 @@ import javafx.scene.control.TextField;
  */
 public class LoginController implements Initializable {
     private AccountHandler accountHandler;
-
+    private String loggedEmail;
 
     @FXML
     private TextField txtLoginEmail;
@@ -82,7 +82,12 @@ public class LoginController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         accountHandler = App.getAccountHandler();
     }        
-
+    
+    public String getLoggedEmail() {
+        return loggedEmail;
+    }
+    
+    
     @FXML
     private void loginAction(ActionEvent event) {
         String emailInput = txtLoginEmail.getText().trim();
@@ -91,6 +96,14 @@ public class LoginController implements Initializable {
             txtLoginEmail.setText("");
             txtLoginPassword.setText("");
             App.changeScene(1);
+            
+            // Store the logged in email address
+            loggedEmail = emailInput;
+            System.out.println("Email logged in: " + loggedEmail);
+            
+            //Loads User Order History
+            AccountController accountController = App.getAccountController();
+            accountController.loadOrderHistory();
         }
     }
 

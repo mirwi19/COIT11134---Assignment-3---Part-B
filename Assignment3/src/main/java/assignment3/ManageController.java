@@ -274,6 +274,8 @@ public class ManageController implements Initializable {
             Product productToAdd = new Product(productID, productName, Double.parseDouble(productPrice), Integer.parseInt(productStock));
             productHandler.addProduct(productToAdd);
             populateScene(); // Used to "refresh" scene
+            productHandler.saveProductData(); //store product to file to file
+            
         } catch (Exception ex) {
             System.err.println(ex);
         }

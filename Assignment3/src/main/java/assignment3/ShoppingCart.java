@@ -73,4 +73,10 @@ public class ShoppingCart {
     public ArrayList<Integer> getCartProductQty() {
         return cartProductQty;
     }
+    
+    //Method to clear shopping cart
+    public void clearCart() {
+        cartProducts.clear();
+        cartProductQty.clear();
+    }
 }

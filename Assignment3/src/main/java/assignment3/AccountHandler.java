@@ -70,26 +70,7 @@ public class AccountHandler {
                         System.out.println("User added: " + currentUser.getUniqueID() + ", " + currentUser.getFirstName() + ", " + currentUser.getLastName() + ", " + currentUser.getEmail());
                         addUser(currentUser);
                     }
-                } else if (currentUser != null) { // Checking if there's an initial user before reading order history
-                    // Set readingOrderHistory
-                    if (!readingOrderHistory) {
-                        readingOrderHistory = true;
-                    }
-                    
-                    // Tokenize order details
-                    StringTokenizer orderTokenizer = new StringTokenizer(dataEntry, ",");
-                    String orderNum = orderTokenizer.nextToken().trim();
-                    String date = orderTokenizer.nextToken().trim();
-                    String shippedTo = orderTokenizer.nextToken().trim();
-                    double orderTotal = Double.parseDouble(orderTokenizer.nextToken().trim());
-                    String status = orderTokenizer.nextToken().trim();
-                    
-                    // Add order to currentUser
-                    Order currentOrder = new Order(orderNum, date, shippedTo, orderTotal, status);
-                    // Debug: Printin currentOrder
-                    System.out.println("Order added to: " + currentUser.getUniqueID() + ", Order details:" + ", " + currentOrder.getOrderNum() + ", " +  currentOrder.getDate() + ", " + currentOrder.getShippedTo() + ", " + currentOrder.getOrderTotal() + ", " + currentOrder.getStatus());
-                    currentUser.getOrderHistory().add(currentOrder);
-                }
+                } 
             }
         } catch (FileNotFoundException ex) {
             System.err.println(ex);
