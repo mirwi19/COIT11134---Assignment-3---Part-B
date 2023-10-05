@@ -16,6 +16,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TableColumn;
 /**
@@ -140,6 +142,17 @@ public class AccountController implements Initializable {
 	this.txtCurrentPass.setText("");
 	this.txtNewPass.setText("");
 	this.txtConfNewPass.setText("");
+	
+	txtFirstNameAlert.setVisible(false);
+	txtLastNameAlert.setVisible(false);
+	txtEmailAlert.setVisible(false);
+	txtPhoneNumAlert.setVisible(false);
+	txtCurrentPassAlert.setVisible(false);
+	txtNewPassAlert.setVisible(false);
+	txtConfNewPassAlert.setVisible(false);
+	txtAddressAlert.setVisible(false);
+	txtPostcodeAlert.setVisible(false);
+	txtStateAlert.setVisible(false);
     }
 
     @FXML
@@ -169,7 +182,14 @@ public class AccountController implements Initializable {
 
     @FXML
     private void deleteAccountAction(ActionEvent event) {
-	accountHandler.removeUser();
+	Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete your account?");
+	alert.setTitle("Account Deletion");
+	alert.setHeaderText(null);
+	alert.showAndWait().ifPresent(response -> {
+	    if (response == ButtonType.OK) {
+		accountHandler.removeUser();
+	    }
+	});
     }
 
     @FXML
@@ -188,6 +208,13 @@ public class AccountController implements Initializable {
 	    accountHandler.getCurrentUser().setFirstName(firstName);
 	    accountHandler.getCurrentUser().setLastName(lastName);
 	    System.out.println("Name updated");
+	    
+	    //Alert for name change
+	    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Name Changed");
+            alert.setHeaderText(null);
+            alert.setContentText("Name has been changed!");
+            alert.showAndWait(); 
 	}
     }
 
@@ -204,6 +231,13 @@ public class AccountController implements Initializable {
 	    //Set users email to new email
 	    accountHandler.getCurrentUser().setEmail(email);
 	    System.out.println("Email updated");
+	    
+	    //Alert for email change
+	    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Email Changed");
+            alert.setHeaderText(null);
+            alert.setContentText("Email has been changed!");
+            alert.showAndWait(); 
 	}
     }
 
@@ -220,6 +254,13 @@ public class AccountController implements Initializable {
 	    //Set users phone number to new phone number
 	    accountHandler.getCurrentUser().setPhoneNum(phoneNum);
 	    System.out.println("Phone number updated");
+	    
+	    //Alert for phone number change
+	    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Phone Number Changed");
+            alert.setHeaderText(null);
+            alert.setContentText("Phone number has been changed!");
+            alert.showAndWait(); 
 	}
     }
 
@@ -246,6 +287,13 @@ public class AccountController implements Initializable {
 	    this.txtCurrentPass.setText("");
 	    this.txtNewPass.setText("");
 	    this.txtConfNewPass.setText("");
+	    
+	    //Alert for password change
+	    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Password Changed");
+            alert.setHeaderText(null);
+            alert.setContentText("Password has been changed!");
+            alert.showAndWait(); 
 	}
     }
 
@@ -271,7 +319,14 @@ public class AccountController implements Initializable {
 	    accountHandler.getCurrentUser().setAddress(address);
 	    accountHandler.getCurrentUser().setPostcode(postcodeInt);
 	    accountHandler.getCurrentUser().setState(state);
-	    System.out.println("Email updated");
+	    System.out.println("Address updated");
+	    
+	    //Alert for address change
+	    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Address Changed");
+            alert.setHeaderText(null);
+            alert.setContentText("Address has been changed!");
+            alert.showAndWait(); 
 	}
     }
     
