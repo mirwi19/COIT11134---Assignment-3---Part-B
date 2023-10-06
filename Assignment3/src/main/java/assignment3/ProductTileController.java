@@ -33,8 +33,7 @@ public class ProductTileController implements Initializable {
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        
+    public void initialize(URL url, ResourceBundle rb) {        
         cart = App.getShoppingCart();
     }    
     
@@ -43,12 +42,14 @@ public class ProductTileController implements Initializable {
         addToCart();
     }
 
+    // Populate tile with product details
     public void setProduct(Product productToSet) {
         this.product = productToSet;
         this.txtName.setText(productToSet.getProductName());
         this.txtPrice.setText(String.format("$%.2f",productToSet.getPrice()));
     }
     
+    // Add product to cart
     public void addToCart() {
         cart.addToCart(product, 1);
     }

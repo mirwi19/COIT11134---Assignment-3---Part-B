@@ -105,5 +105,9 @@ public class User {
     public void setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
     }
+    
+    public boolean getIsAdmin() {
+        return isAdmin;
+    }
 
 }

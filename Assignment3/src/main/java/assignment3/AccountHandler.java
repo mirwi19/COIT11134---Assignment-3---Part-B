@@ -8,6 +8,7 @@ package assignment3;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Formatter;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -27,6 +28,7 @@ public class AccountHandler {
         readUserData();
     }
     
+    // Read User data from file and create User objects
     public void readUserData() {
         Scanner dataInput = null;
         
@@ -34,46 +36,32 @@ public class AccountHandler {
             dataInput = new Scanner(new FileReader(accountListFile));
             String dataEntry;
             User currentUser = null;
-            boolean readingOrderHistory = false; // Flag to indicate if reading order history
             
             while (dataInput.hasNextLine()) {
-                dataEntry = dataInput.nextLine().trim();
-                // If line ends with ':' read user information
-                if (dataEntry.endsWith(":")) {
-                    // Set readingOrderHistory to false on user read
-                    if (currentUser != null && readingOrderHistory) {
-                        readingOrderHistory = false;
-                    }
-                    
-                    // Tokenize user details
-                    StringTokenizer userTokenizer = new StringTokenizer(dataEntry, ",");
-                    if (userTokenizer.hasMoreTokens()) {
-                        int uniqueID = Integer.parseInt(userTokenizer.nextToken().trim());
-                        String password = userTokenizer.nextToken().trim();
-                        String firstName = userTokenizer.nextToken().trim();
-                        String lastName = userTokenizer.nextToken().trim();
-                        String email = userTokenizer.nextToken().trim();
-			String address = userTokenizer.nextToken().trim();
-			int postcode = Integer.parseInt(userTokenizer.nextToken().trim());
-			String state = userTokenizer.nextToken().trim();
-			String phoneNum = userTokenizer.nextToken().trim();
-			boolean isAdmin = Boolean.parseBoolean(userTokenizer.nextToken().trim());
-                        
-                        // Removing ':' separator
-                        if (email.endsWith(":")) { // Email is currently the last token, change to match last token
-                            email = email.substring(0, email.length() - 1);
-                        }
-                        
-                        // Create User
-                        currentUser = new User(uniqueID, password, firstName, lastName, email, address, postcode, state, phoneNum, isAdmin);
-                        // Debug: Printing currentUser
-                        System.out.println("User added: " + currentUser.getUniqueID() + ", " + currentUser.getFirstName() + ", " + currentUser.getLastName() + ", " + currentUser.getEmail());
-                        addUser(currentUser);
-                    }
+                dataEntry = dataInput.nextLine().trim();              
+                // Tokenize user details
+                StringTokenizer userTokenizer = new StringTokenizer(dataEntry, ",");
+                if (userTokenizer.hasMoreTokens()) {
+                    int uniqueID = Integer.parseInt(userTokenizer.nextToken().trim());
+                    String password = userTokenizer.nextToken().trim();
+                    String firstName = userTokenizer.nextToken().trim();
+                    String lastName = userTokenizer.nextToken().trim();
+                    String email = userTokenizer.nextToken().trim();
+                    String address = userTokenizer.nextToken().trim();
+                    int postcode = Integer.parseInt(userTokenizer.nextToken().trim());
+                    String state = userTokenizer.nextToken().trim();
+                    String phoneNum = userTokenizer.nextToken().trim();
+                    boolean isAdmin = Boolean.parseBoolean(userTokenizer.nextToken().trim());
+
+                    // Create User
+                    currentUser = new User(uniqueID, password, firstName, lastName, email, address, postcode, state, phoneNum, isAdmin);
+                    // Debug: Printing currentUser
+                    System.out.println("User added: " + currentUser.getUniqueID() + ", " + currentUser.getFirstName() + ", " + currentUser.getLastName() + ", " + currentUser.getEmail());
+                    addUser(currentUser);                  
                 } 
             }
         } catch (FileNotFoundException ex) {
-            System.err.println(ex);
+            System.err.println("File Not Found:\n" + ex);
         } finally {
             if (dataInput != null) {
                 dataInput.close();
@@ -81,6 +69,7 @@ public class AccountHandler {
         }
     }
     
+    // Add User object to userList
     public void addUser(User userToAdd) {
 	//Add new user to arraylist
         this.userList.add(userToAdd);
@@ -88,6 +77,7 @@ public class AccountHandler {
 	saveUserData();
     }
     
+    // Remove User object from userList
     public void removeUser() {
 	//Remove current user from arraylist
 	this.userList.remove(currentUser);
@@ -97,43 +87,68 @@ public class AccountHandler {
 	App.changeScene(0);
     }
     
+    // Authenticate login attempt
     public boolean authenticateUser(String emailInput, String passwordInput) {
-        if (emailInput == null || emailInput.isEmpty()) {
-            // Invalid Email - empty
-            System.err.println("Invalid Email - Empty");
-            return false;
-        }
-        
-        if (passwordInput == null || passwordInput.isEmpty()) {
-            // Invalid Password - Empty
-            System.err.println("Invalid Password - Empty");
-            return false;
-        }
+        LoginController loginController = App.getLoginController();
+        boolean isEmptyEmail = emailInput == null || emailInput.isEmpty();
+        boolean isEmptyPassword = passwordInput == null || passwordInput.isEmpty();
+        boolean isMatchingEmail = false;
+        boolean isMatchingPassword = false;
         
         for (User user : userList) {
-            if (emailInput.equals(user.getEmail())) {
-                // Matching Email
-                if (passwordInput.equals(user.getPassword())) {
-                    // Matching Password
+            if (!isEmptyEmail && emailInput.equals(user.getEmail())) {
+                isMatchingEmail = true;
+                if (!isEmptyPassword && passwordInput.equals(user.getPassword())) {
+                    isMatchingPassword = true;
                     currentUser = user;
-                    return true;
                 }
             }
         }
         
-        // No matching user found
-        System.err.println("Invalid email or password");
-        return false;
+        if (isMatchingEmail && isMatchingPassword) {
+            // Valid login
+            loginController.setLoginEmailAlert(false);
+            loginController.setLoginPasswordAlert(false);
+            return true;
+        } else {
+            // Handle alerts based on booleans
+            if (isEmptyEmail && isEmptyPassword) {
+                System.out.println("Empty email & password");
+                loginController.setLoginEmailAlert(true);
+                loginController.setLoginPasswordAlert(true);
+            } else if (isEmptyEmail) {
+                System.out.println("Empty email");
+                loginController.setLoginEmailAlert(true);
+                loginController.setLoginPasswordAlert(false);
+            } else if (isEmptyPassword) {
+                System.out.println("Empty password");
+                loginController.setLoginEmailAlert(false);
+                loginController.setLoginPasswordAlert(true);
+            } else if (isMatchingEmail) {
+                System.out.println("Invalid/Empty password");
+                loginController.setLoginEmailAlert(false);
+                loginController.setLoginPasswordAlert(true);
+            }
+            return false;
+        }
     }
     
+    // Get the current logged in user
     public User getCurrentUser() {
         return currentUser;
     }
     
+    // Log current User out and return to login
     public void logout() {
+        // Reset current user
         currentUser = null;
-        App.changeScene(0);
-        
+        // Reset shopping cart
+        ShoppingCart shoppingCart = App.getShoppingCart();
+        shoppingCart.clearCart();
+        // Save user list
+        saveUserData();
+        // Return to login scene
+        App.changeScene(0);        
     }
     
     public int generateID() {
@@ -165,7 +180,21 @@ public class AccountHandler {
 	return index;
     }
     
+    // Save current userList to file
     public void saveUserData(){
-        
+        try {
+            Formatter userOutput = new Formatter(accountListFile); // Open output file
+            int totalUsers = userList.size();
+            
+            for (int i = 0; i < totalUsers; i++) {
+                User currentUser = userList.get(i);                
+                userOutput.format("%s, %s, %s, %s, %s, %s, %s, %s, %s, %s\n", currentUser.getUniqueID(), currentUser.getPassword(), currentUser.getFirstName(), currentUser.getLastName(), currentUser.getEmail(), currentUser.getAddress(), currentUser.getPostcode(), currentUser.getState(), currentUser.getPhoneNum(), currentUser.getIsAdmin());
+            }
+            userOutput.close(); // Close output file
+        } catch (SecurityException ex) {
+            System.err.print("Security Exception:\n" + ex);
+        } catch (FileNotFoundException ex) {
+            System.err.print("File Not Found:\n" + ex);
+        }
     }
 }

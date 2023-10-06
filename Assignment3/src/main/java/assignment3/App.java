@@ -2,9 +2,11 @@ package assignment3;
 
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * JavaFX App
@@ -66,6 +68,15 @@ public class App extends Application {
         mainStage.setScene(sceneLogin);
         mainStage.setTitle("E-commerce App - Login");
         mainStage.show();
+        
+        // Save data on close
+        mainStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                System.out.println("Application closed, saving data...");
+                accountHandler.saveUserData();
+            }
+        });
     }
     
     public FXMLLoader loadFXML(String fileName) throws Exception {
@@ -88,12 +99,12 @@ public class App extends Application {
             case 2:
                 mainStage.setScene(sceneAccount);
                 mainStage.setTitle("E-commerce App - Manage Account");
-                accountController.displayUserDetails();
+                accountController.populateScene();
                 break;
             case 3:
                 mainStage.setScene(sceneCheckout);
                 mainStage.setTitle("E-commerce App - Checkout");
-                checkoutController.displayCart(shoppingCart);
+                checkoutController.populateScene(shoppingCart);
                 break;
             case 4:
                 mainStage.setScene(sceneManage);

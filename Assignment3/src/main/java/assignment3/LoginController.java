@@ -106,14 +106,6 @@ public class LoginController implements Initializable {
             AccountController accountController = App.getAccountController();
             accountController.loadOrderHistory();
         }
-	else {
-	    //Alert for account not found
-	    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("No Account");
-            alert.setHeaderText(null);
-            alert.setContentText("Account not found!");
-            alert.showAndWait(); 
-	}
     }
 
     @FXML
@@ -183,6 +175,18 @@ public class LoginController implements Initializable {
             alert.setContentText("Account has been created!");
             alert.showAndWait(); 
 	}
+    }
+    
+    @FXML
+    public void setLoginEmailAlert(boolean alertStatus) {
+        // Update alert status for login email field
+        txtLoginEmailAlert.setVisible(alertStatus);
+    }
+    
+    @FXML
+    public void setLoginPasswordAlert(boolean alertStatus) {
+        // Update alert status for login password field
+        txtLoginPasswordAlert.setVisible(alertStatus);
     }
 
 }

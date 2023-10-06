@@ -33,6 +33,7 @@ public class ProductHandler {
         readProductData();
     }
     
+    // Read Product data from file and create Product objects
     public void readProductData() {
         Scanner dataInput = null;
         
@@ -67,10 +68,12 @@ public class ProductHandler {
         }
     }
     
+    // Get current productList
     public ArrayList<Product> getProductList() {
         return productList;
     }
 
+    // Add Product to productList
     public void addProduct(Product productToAdd) {
         boolean productExists = false; // Flag for tracking if product exists
         Product existingProduct = null;
@@ -106,6 +109,7 @@ public class ProductHandler {
         }
     }    
     
+    // Remove Product from productList
     public void removeProduct(Product productToRemove) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete: \"" + productToRemove.getProductName() + "\"?");
         alert.showAndWait().ifPresent(response -> {

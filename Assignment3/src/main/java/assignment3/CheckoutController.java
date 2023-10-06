@@ -106,7 +106,18 @@ public class CheckoutController implements Initializable {
     }    
     
     private double cartTotal = 0;
+        
+    // To be called when switching scenes to populate fields
+    public void populateScene(ShoppingCart cart) {
+        displayCart(cart);
+        
+        // Check if current user is an admin
+        if (accountHandler.getCurrentUser() != null) {
+            btnManageProducts.setVisible(accountHandler.getCurrentUser().getIsAdmin()); // Display/Hide manage products based on isAdmin
+        }
+    }
     
+    // Populate cart display with current cart
     public void displayCart(ShoppingCart cart) {
         ArrayList<Product> products = cart.getCartProducts();
         ArrayList<Integer> quantities = cart.getCartProductQty();
@@ -308,7 +319,4 @@ public class CheckoutController implements Initializable {
     private double calculateOrderTotal() {
         return cartTotal;
     }
-
-    
-   
 }

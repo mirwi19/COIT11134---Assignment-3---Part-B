@@ -20,6 +20,7 @@ public class ShoppingCart {
         cartProductQty = new ArrayList<>();
     }
     
+    // Add a product to the cart
     public void addToCart(Product productToAdd, int qty) {
         // Check if product is in cart
         for (int i = 0; i < cartProducts.size(); i++) {
@@ -39,6 +40,7 @@ public class ShoppingCart {
         System.out.println("Prod added: " + productToAdd.getProductID() + ", Qty: " + qty);
     }
     
+    // Remove a product from the cart
     public void removeFromCart(Product productToRemove) {
         // Find product index
         for (int i = 0; i < cartProducts.size(); i++) {
@@ -54,6 +56,7 @@ public class ShoppingCart {
         }
     }
     
+    // Update quantity of current product in cart
     public void updateQuantity(Product productToUpdate, int qtyToSet) {
         for (int i = 0; i < cartProducts.size(); i++) {
             if (cartProducts.get(i).getProductID().equals(productToUpdate.getProductID())) {

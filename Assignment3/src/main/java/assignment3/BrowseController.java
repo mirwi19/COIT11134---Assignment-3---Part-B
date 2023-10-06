@@ -54,13 +54,20 @@ public class BrowseController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         accountHandler = App.getAccountHandler();
         productHandler = App.getProductHandler();
-        productList = productHandler.getProductList();
+        productList = productHandler.getProductList();       
     }   
     
+    // To be called when switching scenes to populate fields
     public void populateScene() {
         displayProducts(productList);
+        
+        // Check if current user is an admin
+        if (accountHandler.getCurrentUser() != null) {
+            btnManageProducts.setVisible(accountHandler.getCurrentUser().getIsAdmin()); // Display/Hide manage products based on isAdmin
+        }
     }
     
+    // Populate product display
     private void displayProducts(ArrayList<Product> productList) {
         // Creat VBox to stack products
         VBox vBox = new VBox();
@@ -100,6 +107,7 @@ public class BrowseController implements Initializable {
         paneProdDisplay.setContent(vBox);
     }
     
+    // Search productList and return products based on search input
     private ArrayList<Product> searchProducts(String searchString) {
         ArrayList<Product> searchResults = new ArrayList<>();
         

@@ -44,6 +44,7 @@ public class ManageTileController implements Initializable {
         manageController = App.getManageController();
     }    
     
+    // Populate tile with product details
     public void setProduct(Product productToSet) {
         this.product = productToSet;
         this.txtName.setText(productToSet.getProductName());

@@ -79,15 +79,14 @@ public class ManageController implements Initializable {
         productList = productHandler.getProductList();
     }
     
+    // To be called when switching scenes to populate fields
     public void populateScene() {
-        if(checkAdmin()) {
-            btnManageProducts.setVisible(true);
-        }
         displayProducts(productList);
         clearAlerts();
         clearFields();
     }
     
+    // Populate product display with existing products
     private void displayProducts(ArrayList<Product> productList) {
         // Create VBox to stack products
         VBox vBox = new VBox();
@@ -128,6 +127,7 @@ public class ManageController implements Initializable {
         paneManageProdDisplay.setContent(vBox);
     }
     
+    // Populate fields with product data to be edited
     public void displayEditProduct(Product productToEdit) {
         Product product = productToEdit;        
         txtProductName.setText(product.getProductName());
@@ -136,6 +136,7 @@ public class ManageController implements Initializable {
         txtProductID.setText(product.getProductID());
     }
     
+    // Search existing product list returning products based on search input
     private ArrayList<Product> searchProducts(String searchString) {
         ArrayList<Product> searchResults = new ArrayList<>();
         
@@ -181,106 +182,113 @@ public class ManageController implements Initializable {
     }
 
     @FXML
-    private void addProductAction(ActionEvent event) {        
-        /* 
-        Example implementation for furture data validation
-        boolean validProductID = false;
-        boolean validProductName = false;
-        boolean validProductPrice = false;
-        boolean validProductStock = false;
-        
-        String productIDInput = txtProductID.getText().trim();
-        String productNameInput = txtProductName.getText().trim();
-        String productPriceInput = txtProductPrice.getText().trim();
-        String productStockInput = txtProductStock.getText().trim();
-        
-        
-        if (dataValidator.validateProductID(productID)) {
-            validProductID = true;
-            String validatedID = productIDInput;
-            txtProductIDAlert.setVisible(false);
-        } else {
-            txtProductIDAlert.setVisible(true);
-        }
-        
-        ... other validation checks
-        
-        if (validProductID && validProductName && validProductPrice && validProductStock) {
-            Product productToAdd = new Product(validatedID, validatedName, validatedPrice, validatedStock);
-            productHandler.addProduct(productToAdd);
-            populateScene(); // Used to "refresh" scene
-        */
-        
+    private void addProductAction(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         
-        String productID = txtProductID.getText().trim();
-        String productName = txtProductName.getText().trim();
-        String productPrice = txtProductPrice.getText().trim();
-        String productStock = txtProductStock.getText().trim();
+        String productIDInput = txtProductID.getText().trim();
+        int validProductID = 0;
+        boolean validID = false;
+        String productNameInput = txtProductName.getText().trim();
+        boolean validName = false;
+        String productPriceInput = txtProductPrice.getText().trim();
+        double validProductPrice = 0;
+        boolean validPrice = false;
+        String productStockInput = txtProductStock.getText().trim();
+        int validProductStock = 0;
+        boolean validStock = false;
+        boolean validProduct = true;
         
-        // Basic input validation - update when data validation is done...
-        if (productID.isBlank()) {
-            System.err.println("Invalid product ID.");
-            alert.setTitle("ERROR - Invalid Product ID");
-            alert.setContentText("Invalid input.\nProduct ID must not be empty AND between 1 - 9999");
-            alert.showAndWait();
-            
-            // Update Alert fields
-            clearAlerts();
+        // Validating Product ID
+        if (!productIDInput.isEmpty() && productIDInput.length() == 4) {
+            try {
+                validProductID = Integer.parseInt(productIDInput);
+                if (validProductID >= 1 && validProductID <= 9999) {
+                    validID = true;
+                    txtProductIDAlert.setVisible(false);
+                }
+            } catch (NumberFormatException ex) {
+                    // alert invalid number
+                    System.out.println("ID: Invalid number");
+                    txtProductIDAlert.setVisible(true);
+            }
+        } else {
+            // alert invalid ID
             txtProductIDAlert.setVisible(true);
-            return;
         }
         
-        // Basic input validation - update when data validation is done...
-        if (productName.isBlank()) {
-            System.err.println("Invalid product name.");
-            alert.setTitle("ERROR - Invalid Product Name");
-            alert.setContentText("Invalid input.\nProduct Name must NOT be empty.");
-            alert.showAndWait();
-            
-            // Update Alert fields
-            clearAlerts();
+        // Validating Product Name
+        if (!productNameInput.isEmpty()) {
+            validName = true;
+            txtProductNameAlert.setVisible(false);
+        } else {
+            // alert invalid name
+            System.out.println("Name empty");
             txtProductNameAlert.setVisible(true);
-            return;
         }
         
-        // Basic input validation - update when data validation is done...
-        if (productPrice.isBlank()) {
-            System.err.println("Invalid product price");
-            alert.setTitle("ERROR - Invalid Price");
-            alert.setContentText("Invalid input.\nProduct Price must NOT be empty.");
-            alert.showAndWait();
-            
-            // Update Alert fields
-            clearAlerts();
+        // Validating Product Price
+        if (!productPriceInput.isEmpty()) {
+            try {
+                validProductPrice = Double.parseDouble(productPriceInput);
+                if (validProductPrice > 0) {
+                    validPrice = true;
+                    txtProductPriceAlert.setVisible(false);
+                } else {
+                    // alert invalid price
+                    System.out.println("Negative Price");
+                    txtProductPriceAlert.setVisible(true);
+                }
+            } catch (NumberFormatException ex) {
+                // alert invalid number
+                System.out.println("Price: Invalid number");
+                txtProductPriceAlert.setVisible(true);
+            }
+        } else {
+            // alert invalid price
+            System.out.println("Invalid Price");
             txtProductPriceAlert.setVisible(true);
-            return;
         }
         
-        // Basic input validation - update when data validation is done...
-        if (productStock.isBlank()) {
-            System.err.println("Invalid product stock");
-            alert.setTitle("ERROR - Invalid Stock");
-            alert.setContentText("Invalid input.\nProduct Stock must NOT be empty.");
-            alert.showAndWait();
-            
-            // Update Alert fields
-            clearAlerts();
+        // Validating Product Stock 
+        if (!productStockInput.isEmpty()) {
+            try {
+                validProductStock = Integer.parseInt(productStockInput);
+                if (validProductStock > 0) {
+                    validStock = true;
+                    txtProductStockAlert.setVisible(false);
+                } else {
+                    // alert invalid sotck
+                    System.out.println("Negative Stock");
+                    txtProductStockAlert.setVisible(true);
+                }
+            } catch (NumberFormatException ex) {
+                // alert invalid number
+                System.out.println("Stock: Invalid number");
+                txtProductStockAlert.setVisible(true);
+            }
+        } else {
+            // alert invalid sotck
+            System.out.println("Invalid Stock");
             txtProductStockAlert.setVisible(true);
-            return;
         }
         
-        try {
-            Product productToAdd = new Product(productID, productName, Double.parseDouble(productPrice), Integer.parseInt(productStock));
-            productHandler.addProduct(productToAdd);
-            populateScene(); // Used to "refresh" scene
-            productHandler.saveProductData(); //store product to file to file
-            
-        } catch (Exception ex) {
-            System.err.println(ex);
+        if (!validID || !validName || !validPrice || !validStock) {
+            validProduct = false;
         }
+        
+        if (validProduct) {
+            // Clear input fields
+            clearFields();
+            // Create new Product object with valid data and add to productList
+            Product productToAdd = new Product(productIDInput, productNameInput, Double.parseDouble(productPriceInput), Integer.parseInt(productStockInput));
+            productHandler.addProduct(productToAdd);
+            populateScene(); // Called to "refresh" scene
+            productHandler.saveProductData(); // Store product to file
+        }
+        
     }
     
+    // Clear all triggered alerts
     private void clearAlerts() {
         txtProductNameAlert.setVisible(false);
         txtProductPriceAlert.setVisible(false);
@@ -288,19 +296,13 @@ public class ManageController implements Initializable {
         txtProductIDAlert.setVisible(false);
     }
     
+    // Clear all input fields
     private void clearFields() {
         txtProductName.setText("");
         txtProductPrice.setText("");
         txtProductStock.setText("");
         txtProductID.setText("");
         txtSearchField.setText("");
-    }
-    
-    // Move this method to AccountHandler???
-    private boolean checkAdmin() {
-        // TODO: Implement isAdmin check on currentUser when isAdmin is implemented
-        // E.g., accountHandler.getCurrentUser().isAdmin();
-        return false;
     }
     
     @FXML

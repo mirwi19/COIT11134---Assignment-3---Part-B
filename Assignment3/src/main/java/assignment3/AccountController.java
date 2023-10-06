@@ -22,8 +22,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TableColumn;
 /**
  * FXML Controller class
- *
- * @author Matth
  */
 public class AccountController implements Initializable {
     private AccountHandler accountHandler;
@@ -115,6 +113,16 @@ public class AccountController implements Initializable {
         initializeOrderHistoryTable();
     }
     
+    // To be called when switching scenes to populate fields
+    public void populateScene() {
+        displayUserDetails();
+        
+        // Check if current user is an admin
+        if (accountHandler.getCurrentUser() != null) {
+            btnManageProducts.setVisible(accountHandler.getCurrentUser().getIsAdmin()); // Display/Hide manage products based on isAdmin
+        }
+    }
+    
     // Load the order history from the text file
     public void loadOrderHistory() {
         ObservableList<Order> loadedOrderHistory = OrderHistoryHandler.loadOrderHistoryFromTextFile();
@@ -131,7 +139,8 @@ public class AccountController implements Initializable {
     
     }
     
-    public void displayUserDetails() {
+    // Initialize fields with existing data
+    private void displayUserDetails() {
         this.txtFirstName.setText(accountHandler.getCurrentUser().getFirstName());
         this.txtLastName.setText(accountHandler.getCurrentUser().getLastName());
         this.txtEmail.setText(accountHandler.getCurrentUser().getEmail());

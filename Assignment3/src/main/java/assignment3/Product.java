@@ -54,6 +54,4 @@ public class Product {
         this.stock = stock;
     }
     
-    
-
 }
