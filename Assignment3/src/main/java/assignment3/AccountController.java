@@ -218,6 +218,9 @@ public class AccountController implements Initializable {
 	    accountHandler.getCurrentUser().setLastName(lastName);
 	    System.out.println("Name updated");
 	    
+	    //Save updated user data to file
+	    accountHandler.saveUserData();
+	    
 	    //Alert for name change
 	    Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Name Changed");
@@ -241,6 +244,9 @@ public class AccountController implements Initializable {
 	    accountHandler.getCurrentUser().setEmail(email);
 	    System.out.println("Email updated");
 	    
+	    //Save updated user data to file
+	    accountHandler.saveUserData();
+	    
 	    //Alert for email change
 	    Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Email Changed");
@@ -263,6 +269,9 @@ public class AccountController implements Initializable {
 	    //Set users phone number to new phone number
 	    accountHandler.getCurrentUser().setPhoneNum(phoneNum);
 	    System.out.println("Phone number updated");
+	    
+	    //Save updated user data to file
+	    accountHandler.saveUserData();
 	    
 	    //Alert for phone number change
 	    Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -291,6 +300,9 @@ public class AccountController implements Initializable {
 	    //Set users password to new password
 	    accountHandler.getCurrentUser().setPassword(newPassword);
 	    System.out.println("Password updated");
+	    
+	    //Save updated user data to file
+	    accountHandler.saveUserData();
 
 	    //Set all password fields blank
 	    this.txtCurrentPass.setText("");
@@ -329,6 +341,9 @@ public class AccountController implements Initializable {
 	    accountHandler.getCurrentUser().setPostcode(postcodeInt);
 	    accountHandler.getCurrentUser().setState(state);
 	    System.out.println("Address updated");
+	    
+	    //Save updated user data to file
+	    accountHandler.saveUserData();
 	    
 	    //Alert for address change
 	    Alert alert = new Alert(Alert.AlertType.INFORMATION);
