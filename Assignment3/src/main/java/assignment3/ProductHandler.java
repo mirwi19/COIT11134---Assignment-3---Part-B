@@ -117,6 +117,7 @@ public class ProductHandler {
                 try {
                     if (productList.remove(productToRemove)) {
                         System.out.println("Product removed.");
+                        saveProductData();
                     } else {
                         System.err.println("Product not found in list.");
                     }
