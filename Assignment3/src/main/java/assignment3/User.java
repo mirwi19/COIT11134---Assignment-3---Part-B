@@ -1,15 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 package assignment3;
 
 /**
+ * This class represents a user in the system with various attributes such as
+ * unique ID, password, first name, last name, email, address, postcode, state,
+ * phone number, and admin status. It provides methods to access and modify
+ * these attributes.
  *
+ * @author Matthew Hay
  * @author Matthew Irwin
+ * @author Matthew Wallis
  */
 public class User {
+
     private int uniqueID;
     private String password;
     private String firstName;
@@ -20,18 +22,18 @@ public class User {
     private String state;
     private String phoneNum;
     private boolean isAdmin;
-    
+
     public User(int uniqueID, String password, String firstName, String lastName, String email, String address, int postcode, String state, String phoneNum, boolean isAdmin) {
         this.uniqueID = uniqueID;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-	this.address = address;
-	this.postcode = postcode;
-	this.state = state;
-	this.phoneNum = phoneNum;
-	this.isAdmin = isAdmin;
+        this.address = address;
+        this.postcode = postcode;
+        this.state = state;
+        this.phoneNum = phoneNum;
+        this.isAdmin = isAdmin;
     }
 
     public int getUniqueID() {
@@ -105,7 +107,7 @@ public class User {
     public void setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
     }
-    
+
     public boolean getIsAdmin() {
         return isAdmin;
     }

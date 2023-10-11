@@ -1,15 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 package assignment3;
 
 /**
+ * This class represents a product with attributes such as product ID, product
+ * name, price, and stock quantity. It provides methods to access and modify
+ * these attributes.
  *
+ * @author Matthew Hay
  * @author Matthew Irwin
+ * @author Matthew Wallis
  */
 public class Product {
+
     private String productID;
     private String productName;
     private double price;
@@ -53,5 +54,5 @@ public class Product {
     public void setStock(int stock) {
         this.stock = stock;
     }
-    
+
 }

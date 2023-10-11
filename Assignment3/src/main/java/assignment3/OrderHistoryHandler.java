@@ -12,32 +12,37 @@ import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 
 /**
- *
+ * This class handles the loading and saving of order history data to/from a
+ * text file. It provides methods to load order history from a text file and
+ * save order history to a text file. Additionally, it ensures the existence of
+ * the order history file.
  *
  * @author Matthew Hay
+ * @author Matthew Irwin
+ * @author Matthew Wallis
  */
 public class OrderHistoryHandler {
-    
+
     public static ObservableList<Order> loadOrderHistoryFromTextFile() {
         ObservableList<Order> observableOrderHistory = FXCollections.observableArrayList();
 
         ensureOrderHistoryFileExists();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("order_history.txt"))) {
+        try ( BufferedReader reader = new BufferedReader(new FileReader("order_history.txt"))) {
             String line; // Read each line of the file
 
             // Skip the header row
             reader.readLine();
-            
+
             while ((line = reader.readLine()) != null) {
                 String[] record = line.split(",");
-                
+
                 //check record length
                 if (record.length == 6) {
                     String orderNum = record[0];
                     String date = record[1];
                     String shippedTo = record[2];
-                    
+
                     double orderTotal;
                     try {
                         orderTotal = Double.parseDouble(record[3]);
@@ -47,11 +52,11 @@ public class OrderHistoryHandler {
                     }
                     String status = record[4];
                     String userEmail = record[5];
-                    
+
                     // Retrieves logged in email
                     LoginController loginController = App.getLoginController();
                     String LoggedInEmail = loginController.getLoggedEmail();
-                    
+
                     // Retrieves orders which match the user's email.
                     if (userEmail.equals(LoggedInEmail)) {
                         System.out.println("Loaded Order: " + orderNum); // Debug print
@@ -72,7 +77,7 @@ public class OrderHistoryHandler {
 
     // Method to save order history to file
     public static void saveOrderHistoryToTextFile(ArrayList<Order> orderHistory) {
-        try (PrintWriter writer = new PrintWriter(new FileWriter("order_history.txt", true))) {
+        try ( PrintWriter writer = new PrintWriter(new FileWriter("order_history.txt", true))) {
 
             // Write each order record
             for (Order order : orderHistory) {

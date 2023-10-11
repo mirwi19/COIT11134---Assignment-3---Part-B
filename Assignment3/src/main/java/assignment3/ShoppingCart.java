@@ -1,17 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 package assignment3;
 
 import java.util.ArrayList;
 
 /**
+ * This class represents a shopping cart that allows users to add, remove, and
+ * update products. It keeps track of the products in the cart and their
+ * respective quantities.
  *
+ * @author Matthew Hay
  * @author Matthew Irwin
+ * @author Matthew Wallis
  */
 public class ShoppingCart {
+
     private ArrayList<Product> cartProducts;
     private ArrayList<Integer> cartProductQty;
 
@@ -19,7 +20,7 @@ public class ShoppingCart {
         cartProducts = new ArrayList<>();
         cartProductQty = new ArrayList<>();
     }
-    
+
     // Add a product to the cart
     public void addToCart(Product productToAdd, int qty) {
         // Check if product is in cart
@@ -32,14 +33,14 @@ public class ShoppingCart {
                 return;
             }
         }
-        
+
         // Product not found in cart, add new entry
         cartProducts.add(productToAdd);
         cartProductQty.add(qty);
         // Debug: Printing new cart entry
         System.out.println("Prod added: " + productToAdd.getProductID() + ", Qty: " + qty);
     }
-    
+
     // Remove a product from the cart
     public void removeFromCart(Product productToRemove) {
         // Find product index
@@ -55,7 +56,7 @@ public class ShoppingCart {
             }
         }
     }
-    
+
     // Update quantity of current product in cart
     public void updateQuantity(Product productToUpdate, int qtyToSet) {
         for (int i = 0; i < cartProducts.size(); i++) {
@@ -68,15 +69,15 @@ public class ShoppingCart {
             }
         }
     }
-    
+
     public ArrayList<Product> getCartProducts() {
         return cartProducts;
     }
-    
+
     public ArrayList<Integer> getCartProductQty() {
         return cartProductQty;
     }
-    
+
     //Method to clear shopping cart
     public void clearCart() {
         cartProducts.clear();

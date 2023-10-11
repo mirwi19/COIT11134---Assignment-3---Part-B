@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package assignment3;
 
 import java.io.IOException;
@@ -23,11 +19,20 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 /**
- * FXML Controller class
+ * Controller class for managing products and user interactions related to
+ * product management
  *
- * @author Matth
+ * This controller handles the management of products, including adding and
+ * searching for products. It also provides functionality to edit and display
+ * product details, and it communicates with the `ProductHandler` to interact
+ * with the product data.
+ *
+ * @author Matthew Hay
+ * @author Matthew Irwin
+ * @author Matthew Wallis
  */
 public class ManageController implements Initializable {
+
     private AccountHandler accountHandler;
     private ProductHandler productHandler;
     private ArrayList<Product> productList;
@@ -78,28 +83,28 @@ public class ManageController implements Initializable {
         productHandler = App.getProductHandler();
         productList = productHandler.getProductList();
     }
-    
+
     // To be called when switching scenes to populate fields
     public void populateScene() {
         displayProducts(productList);
         clearAlerts();
         clearFields();
     }
-    
+
     // Populate product display with existing products
     private void displayProducts(ArrayList<Product> productList) {
         // Create VBox to stack products
         VBox vBox = new VBox();
         vBox.setSpacing(10);
-        
+
         // Create productTile
-        for (int i = 0; i < productList.size(); i+= 2) {
+        for (int i = 0; i < productList.size(); i += 2) {
             HBox hBox = new HBox();
             hBox.setSpacing(10);
-            
-            for (int j = i; j < Math.min(i +2, productList.size()); j++) { // Math.min to prevent index out of bounds
+
+            for (int j = i; j < Math.min(i + 2, productList.size()); j++) { // Math.min to prevent index out of bounds
                 Product product = productList.get(j);
-                
+
                 // Create productTile
                 try {
                     // Create FXMLLoader
@@ -126,43 +131,43 @@ public class ManageController implements Initializable {
         // Add VBox to scene
         paneManageProdDisplay.setContent(vBox);
     }
-    
+
     // Populate fields with product data to be edited
     public void displayEditProduct(Product productToEdit) {
-        Product product = productToEdit;        
+        Product product = productToEdit;
         txtProductName.setText(product.getProductName());
-        txtProductPrice.setText(String.format("%.2f",product.getPrice()));
+        txtProductPrice.setText(String.format("%.2f", product.getPrice()));
         txtProductStock.setText(String.format("%d", product.getStock()));
         txtProductID.setText(product.getProductID());
     }
-    
+
     // Search existing product list returning products based on search input
     private ArrayList<Product> searchProducts(String searchString) {
         ArrayList<Product> searchResults = new ArrayList<>();
-        
+
         for (Product product : productList) {
             if (product.getProductName().toLowerCase().contains(searchString.toLowerCase())) {
                 searchResults.add(product);
             }
         }
-        
+
         if (searchString.isBlank()) {
             return productList;
         } else {
             return searchResults;
         }
     }
-    
+
     @FXML
     private void searchAction(ActionEvent event) {
         String searchString = txtSearchField.getText().trim();
         displayProducts(searchProducts(searchString));
-    }   
+    }
 
     @FXML
     private void autoIDAction(ActionEvent event) {
         int nextID = 1; // Lowest possible productID
-        
+
         // Begin searching for unused ID
         while (nextID <= 9999) {
             boolean isIDUsed = false; // Flag to track if ID is used
@@ -184,7 +189,7 @@ public class ManageController implements Initializable {
     @FXML
     private void addProductAction(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        
+
         String productIDInput = txtProductID.getText().trim();
         int validProductID = 0;
         boolean validID = false;
@@ -197,7 +202,7 @@ public class ManageController implements Initializable {
         int validProductStock = 0;
         boolean validStock = false;
         boolean validProduct = true;
-        
+
         // Validating Product ID
         if (!productIDInput.isEmpty() && productIDInput.length() == 4) {
             try {
@@ -207,15 +212,15 @@ public class ManageController implements Initializable {
                     txtProductIDAlert.setVisible(false);
                 }
             } catch (NumberFormatException ex) {
-                    // alert invalid number
-                    System.out.println("ID: Invalid number");
-                    txtProductIDAlert.setVisible(true);
+                // alert invalid number
+                System.out.println("ID: Invalid number");
+                txtProductIDAlert.setVisible(true);
             }
         } else {
             // alert invalid ID
             txtProductIDAlert.setVisible(true);
         }
-        
+
         // Validating Product Name
         if (!productNameInput.isEmpty()) {
             validName = true;
@@ -225,7 +230,7 @@ public class ManageController implements Initializable {
             System.out.println("Name empty");
             txtProductNameAlert.setVisible(true);
         }
-        
+
         // Validating Product Price
         if (!productPriceInput.isEmpty()) {
             try {
@@ -248,7 +253,7 @@ public class ManageController implements Initializable {
             System.out.println("Invalid Price");
             txtProductPriceAlert.setVisible(true);
         }
-        
+
         // Validating Product Stock 
         if (!productStockInput.isEmpty()) {
             try {
@@ -271,11 +276,11 @@ public class ManageController implements Initializable {
             System.out.println("Invalid Stock");
             txtProductStockAlert.setVisible(true);
         }
-        
+
         if (!validID || !validName || !validPrice || !validStock) {
             validProduct = false;
         }
-        
+
         if (validProduct) {
             // Clear input fields
             clearFields();
@@ -285,9 +290,9 @@ public class ManageController implements Initializable {
             populateScene(); // Called to "refresh" scene
             productHandler.saveProductData(); // Store product to file
         }
-        
+
     }
-    
+
     // Clear all triggered alerts
     private void clearAlerts() {
         txtProductNameAlert.setVisible(false);
@@ -295,7 +300,7 @@ public class ManageController implements Initializable {
         txtProductStockAlert.setVisible(false);
         txtProductIDAlert.setVisible(false);
     }
-    
+
     // Clear all input fields
     private void clearFields() {
         txtProductName.setText("");
@@ -304,12 +309,12 @@ public class ManageController implements Initializable {
         txtProductID.setText("");
         txtSearchField.setText("");
     }
-    
+
     @FXML
     private void browseProdsAction(ActionEvent event) {
         App.changeScene(1);
     }
-    
+
     @FXML
     private void editAccountAction(ActionEvent event) {
         App.changeScene(2);
@@ -329,5 +334,5 @@ public class ManageController implements Initializable {
     private void manageProductsAction(ActionEvent event) {
         App.changeScene(4);
     }
-    
+
 }

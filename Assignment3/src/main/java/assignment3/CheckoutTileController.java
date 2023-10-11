@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package assignment3;
 
 import java.net.URL;
@@ -13,17 +9,26 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+
 /**
- * FXML Controller class
+ * Controller class for the individual product tile displayed in the Checkout
+ * scene
  *
- * @author Matth
+ * This class handles interactions and actions related to a single product tile
+ * in the shopping cart during the checkout process. It allows users to adjust
+ * the quantity of a product, remove it from the cart, and updates the cart
+ * display accordingly.
+ *
+ * @author Matthew Hay
+ * @author Matthew Irwin
+ * @author Matthew Wallis
  */
 public class CheckoutTileController implements Initializable {
-    
+
     private Product product;
     private int quantity;
     private ShoppingCart cart;
-    
+
     private CheckoutController checkoutController;
 
     @FXML
@@ -38,6 +43,7 @@ public class CheckoutTileController implements Initializable {
     private Text txtName;
     @FXML
     private Text txtPrice;
+
     /**
      * Initializes the controller class.
      */
@@ -45,8 +51,8 @@ public class CheckoutTileController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         cart = App.getShoppingCart();
         checkoutController = App.getCheckoutController();
-    }    
-        
+    }
+
     // Populate tile with product details
     public void setProduct(Product product, int quantity) {
         this.product = product;
@@ -55,24 +61,24 @@ public class CheckoutTileController implements Initializable {
         this.txtPrice.setText(String.format("$%.2f", product.getPrice()));
         this.txtQuantity.setText("" + quantity);
     }
-        
+
     @FXML
     public void removeFromCart() {
         cart.removeFromCart(product);
         checkoutController.displayCart(cart);
     }
-    
+
     private void removeFromCart(ActionEvent event) {
         removeFromCart();
     }
-    
+
     @FXML
     private void qtyDecAction(ActionEvent event) {
         String currentQty = this.txtQuantity.getText();
-        
+
         try {
             int qty = Integer.parseInt(currentQty);
-            
+
             if (qty > 1) {
                 qty -= 1;
                 this.txtQuantity.setText(String.valueOf(qty));
@@ -87,10 +93,10 @@ public class CheckoutTileController implements Initializable {
     @FXML
     private void qtyIncAction(ActionEvent event) {
         String currentQty = this.txtQuantity.getText();
-        
+
         try {
             int qty = Integer.parseInt(currentQty);
-            
+
             if (qty >= 1) {
                 qty += 1;
                 this.txtQuantity.setText(String.valueOf(qty));

@@ -1,8 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 package assignment3;
 
 import java.io.FileNotFoundException;
@@ -18,40 +13,48 @@ import javafx.scene.control.ButtonType;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+
 /**
+ * This class handles the management of product data, including reading from and
+ * saving to a text file, adding and removing products, and updating existing
+ * products. It uses a list of Product objects and provides methods to interact
+ * with this list.
  *
+ * @author Matthew Hay
  * @author Matthew Irwin
+ * @author Matthew Wallis
  */
 public class ProductHandler {
+
     private String productListFile;
     private ArrayList<Product> productList;
-    
+
     public ProductHandler(String fileName) {
         this.productListFile = fileName + ".txt";
         this.productList = new ArrayList<>();
-        
+
         readProductData();
     }
-    
+
     // Read Product data from file and create Product objects
     public void readProductData() {
         Scanner dataInput = null;
-        
+
         try {
             dataInput = new Scanner(new FileReader(productListFile));
             String dataEntry;
-            
+
             while (dataInput.hasNextLine()) {
                 dataEntry = dataInput.nextLine();
                 StringTokenizer tokenizer = new StringTokenizer(dataEntry, ",");
-                
+
                 // Tokenize product
                 if (tokenizer.hasMoreTokens()) {
                     String prodID = tokenizer.nextToken().trim();
                     String productName = tokenizer.nextToken().trim();
                     double price = Double.parseDouble(tokenizer.nextToken().trim());
                     int stock = Integer.parseInt(tokenizer.nextToken().trim());
-                    
+
                     // Add product to productList
                     Product currentProduct = new Product(prodID, productName, price, stock);
                     // Debug: printing product
@@ -67,7 +70,7 @@ public class ProductHandler {
             }
         }
     }
-    
+
     // Get current productList
     public ArrayList<Product> getProductList() {
         return productList;
@@ -91,24 +94,24 @@ public class ProductHandler {
             Alert alert = new Alert(Alert.AlertType.NONE);
             alert.setTitle("Existing Product Found");
             alert.setContentText("Existing Product Found!\nDo you wish to update the following produt:\nProduct Name: " + existingProduct.getProductName() + "\nProduct Price: $" + String.format("%.2f", existingProduct.getPrice()) + "\nProduct Stock: " + existingProduct.getStock());
-            
+
             // Creating buttons
             ButtonType updateButton = new ButtonType("Update", ButtonData.YES);
-            ButtonType cancelButton = new ButtonType("Cancel", ButtonData.NO);            
-            alert.getButtonTypes().setAll(updateButton, cancelButton);      
-            
+            ButtonType cancelButton = new ButtonType("Cancel", ButtonData.NO);
+            alert.getButtonTypes().setAll(updateButton, cancelButton);
+
             // Check response
-            Optional<ButtonType> result = alert.showAndWait();            
-            if (result.isPresent() && result.get() == updateButton) {              
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == updateButton) {
                 existingProduct.setProductName(productToAdd.getProductName());
                 existingProduct.setPrice(productToAdd.getPrice());
                 existingProduct.setStock(productToAdd.getStock());
-            }            
+            }
         } else {
             productList.add(productToAdd);
         }
-    }    
-    
+    }
+
     // Remove Product from productList
     public void removeProduct(Product productToRemove) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete: \"" + productToRemove.getProductName() + "\"?");
@@ -127,10 +130,10 @@ public class ProductHandler {
             }
         });
     }
-    
+
     //Save Product data to file
     public void saveProductData() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(productListFile))) {
+        try ( BufferedWriter writer = new BufferedWriter(new FileWriter(productListFile))) {
             for (Product product : productList) {
                 String productData = String.format("%s, %s, %.2f, %d",
                         product.getProductID(), product.getProductName(),

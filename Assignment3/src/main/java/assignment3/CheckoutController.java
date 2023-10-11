@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package assignment3;
 
 import java.io.IOException;
@@ -35,18 +31,25 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 /**
- * FXML Controller class
+ * Controller class for the Checkout functionality
  *
- * @author Matth
+ * This class handles the checkout process, including validating input fields,
+ * generating order numbers, calculating order totals, and saving order history.
+ * It interacts with the shopping cart, user account, and order history
+ * components of the application.
+ *
+ * @author Matthew Hay
+ * @author Matthew Irwin
+ * @author Matthew Wallis
  */
 public class CheckoutController implements Initializable {
+
     private AccountHandler accountHandler;
     private ArrayList<Order> orderHistory = new ArrayList<>();
-    
-    
+
     public CheckoutController() {
     }
-        
+
     @FXML
     private ScrollPane paneCartDisplay;
     @FXML
@@ -95,61 +98,60 @@ public class CheckoutController implements Initializable {
     private Button btnCheckout;
     @FXML
     private Button btnContinueShopping;
-    
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         accountHandler = App.getAccountHandler();
-    }    
-    
+    }
+
     private double cartTotal = 0;
-        
+
     // To be called when switching scenes to populate fields
     public void populateScene(ShoppingCart cart) {
         displayCart(cart);
-        
+
         // Check if current user is an admin
         if (accountHandler.getCurrentUser() != null) {
             btnManageProducts.setVisible(accountHandler.getCurrentUser().getIsAdmin()); // Display/Hide manage products based on isAdmin
         }
     }
-    
+
     // Populate cart display with current cart
     public void displayCart(ShoppingCart cart) {
         ArrayList<Product> products = cart.getCartProducts();
         ArrayList<Integer> quantities = cart.getCartProductQty();
-        
+
         cartTotal = 0;
-        
+
         // Create VBox to stack cart
         VBox vBox = new VBox();
         vBox.setSpacing(10);
-        
+
         // Process cart
         for (int i = 0; i < products.size(); i++) {
             Product product = products.get(i);
             int quantity = quantities.get(i);
-            
+
             // Update carTotal
             cartTotal += product.getPrice() * quantity;
-            
+
             // Create carTile
             try {
                 // Create FXMLLoader
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("checkoutTile.fxml"));
-                
+
                 // Load tile into AnchorPane
                 AnchorPane cartTilePane = loader.load();
-                
+
                 // Get Controller
                 CheckoutTileController cartController = loader.getController();
-                
+
                 // Set Product details
                 cartController.setProduct(product, quantity);
-                
+
                 // Add cartTilePane to VBox
                 vBox.getChildren().add(cartTilePane);
             } catch (IOException ex) {
@@ -158,11 +160,11 @@ public class CheckoutController implements Initializable {
         }
         // Add VBox to Checkout scene
         paneCartDisplay.setContent(vBox);
-        
+
         // Display carTotal
         this.txtTotal.setText(String.format("Total: $%.2f", cartTotal));
-    } 
-     
+    }
+
     @FXML
     private void browseProdsAction(ActionEvent event) {
         App.changeScene(1);
@@ -191,25 +193,25 @@ public class CheckoutController implements Initializable {
     @FXML
     private void updateAddressAction(ActionEvent event) {
     }
-    
+
     @FXML
     private void checkoutAction(ActionEvent event) {
-        
+
         // Validate the input fields
         String address = txtAddress.getText().trim();
         String postcode = txtPostcode.getText().trim();
         String state = txtState.getText().trim();
-        
-        if (cartTotal == 0.0){
+
+        if (cartTotal == 0.0) {
             //display alert for when cart is empty
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Cart is Empty");
             alert.setHeaderText(null);
             alert.setContentText("Cannot Checkout an empty cart!");
-            alert.showAndWait();  
+            alert.showAndWait();
             return;
         }
-        
+
         if (address.isEmpty() || postcode.isEmpty() || state.isEmpty()) {
             // Show an error message and prevent checkout if any address fields are empty
             Alert alert = new Alert(AlertType.ERROR);
@@ -219,23 +221,23 @@ public class CheckoutController implements Initializable {
             alert.showAndWait();
             return;
         }
-        
+
         String orderNum = generateOrderNumber(); // Generate order number
         String date = getCurrentDate(); // Get current date
         String shippedTo = txtAddress.getText() + ". " + txtState.getText() + ". " + txtPostcode.getText();
         double orderTotal = calculateOrderTotal(); // Calculate the order total
         String status = "Pending"; // Set the initial status as "Pending"
-        
+
         //retrieve logged in user email
         LoginController loginController = App.getLoginController();
         String userEmail = loginController.getLoggedEmail();
-        
+
         // Create an Order instance
         Order order = new Order(orderNum, date, shippedTo, orderTotal, status, userEmail);
 
         // Add the order to the order history
         orderHistory.add(order);
-        
+
         // Save the order history to a file
         OrderHistoryHandler.saveOrderHistoryToTextFile(orderHistory);
 
@@ -246,25 +248,25 @@ public class CheckoutController implements Initializable {
         vBox.getChildren().clear();
         cartTotal = 0;
         this.txtTotal.setText("$0.00");
-        
+
         // Displays an Alert to show the checkout was successful
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Checkout Successful");
         alert.setHeaderText(null);
         alert.setContentText("Your checkout was successful!");
-        alert.showAndWait();   
-        
+        alert.showAndWait();
+
         //Re-Load order history to include newly placed order.
         AccountController accountController = App.getAccountController();
         accountController.loadOrderHistory();
-        
+
         //Debugging
         System.out.println("Size of orderHistory before adding: " + orderHistory.size());
         orderHistory.add(order);
         System.out.println("Size of orderHistory after adding: " + orderHistory.size());
 
     }
-    
+
     // Generate a random order number
     private String generateOrderNumber() {
         Set<String> existingOrderNumbers = loadExistingOrderNumbers();
@@ -287,7 +289,7 @@ public class CheckoutController implements Initializable {
     private Set<String> loadExistingOrderNumbers() {
         Set<String> existingOrderNumbers = new HashSet<>();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("order_history.txt"))) {
+        try ( BufferedReader reader = new BufferedReader(new FileReader("order_history.txt"))) {
             String line;
             reader.readLine(); // Skip header row
             while ((line = reader.readLine()) != null) {
@@ -315,6 +317,7 @@ public class CheckoutController implements Initializable {
 
         return formattedDate;
     }
+
     //calcuate total order
     private double calculateOrderTotal() {
         return cartTotal;

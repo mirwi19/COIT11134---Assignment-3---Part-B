@@ -1,15 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 package assignment3;
 
 /**
+ * Represents an order Each order contains information such as order number,
+ * date, shipping details, order total, status, and the user's email.
  *
+ * This class provides methods to access and manipulate order data.
+ *
+ * @author Matthew Hay
  * @author Matthew Irwin
+ * @author Matthew Wallis
  */
 public class Order {
+
     private String orderNum;
     private String date;
     private String shippedTo;
@@ -49,11 +51,11 @@ public class Order {
     public void setShippedTo(String shippedTo) {
         this.shippedTo = shippedTo;
     }
-    
+
     public double getOrderTotal() {
         return orderTotal;
     }
-    
+
     public void setOrderTotal(double orderTotal) {
         this.orderTotal = orderTotal;
     }
@@ -65,13 +67,13 @@ public class Order {
     public void setStatus(String status) {
         this.status = status;
     }
-    
+
     public String getUserEmail() {
         return userEmail;
     }
+
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
     }
-    
 
 }
